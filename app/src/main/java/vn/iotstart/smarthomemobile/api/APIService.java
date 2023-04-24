@@ -6,9 +6,12 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import vn.iotstart.smarthomemobile.model.User;
 
 public interface APIService {
     public static final String BASE_URL="http://192.168.1.8:8085";
@@ -28,4 +31,12 @@ public interface APIService {
                               @Field("email") String email/*,
                               @Field("password") String password,
                               @Field("gender") String gender*/);
+
+    @Headers("Content-Type: application/x-www-form-urlencoded")
+    @POST("/user/register")
+    Call<User> registerUser(@Body User userModel);
+
+
+    @POST("/user/register")
+    Call<User> createUser(@Body User user);
 }
