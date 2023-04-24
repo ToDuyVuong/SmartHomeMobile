@@ -23,7 +23,7 @@ import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.model.User;
 
-public class RegisterActivity extends AppCompatActivity {
+public class SiginUp extends AppCompatActivity {
 
     EditText account;
     EditText username;
@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.layout_register);
         anhXa();
 
         textViewLogin.setOnClickListener(new View.OnClickListener() {
@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //if user pressed on textview that already register open LoginActivity
                 finish();
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                startActivity(new Intent(SiginUp.this, Register.class));
             }
         });
 
@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 checkEmpty();
-//                registerUser();
+                registerUser();
             }
         });
 
@@ -104,8 +104,6 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        registerUser();
-
     }
 
 
@@ -138,15 +136,12 @@ public class RegisterActivity extends AppCompatActivity {
                     if (user != null) {
                         Log.d("TAG", "User: " + user.toString());
                         Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        Intent intent = new Intent(SiginUp.this, MainActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("userA", user);
                         intent.putExtras(bundle);
                         startActivity(intent);
-                    }else {
-                        Toast.makeText(getApplicationContext(), "Account already exists", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
 

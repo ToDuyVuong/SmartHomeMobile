@@ -75,7 +75,7 @@ public class Register extends AppCompatActivity {
 
         APIService apiService = retrofit.create(APIService.class);
 
-        User user = new User("123ad", usera, pass, "https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png", true, "email", "0", "DiaChi");
+        User user = new User("123ad", usera, pass, "https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png", "true", "email", "0", "DiaChi");
 
         Log.d("TAG", "User name: " + user.getId());
         Log.d("TAG", "User pass: " + user.getUsername());

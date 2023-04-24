@@ -1,43 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="25dp"
-    tools:context=".activity.Register"
-    android:layout_height="match_parent">
+
+    android:background="@drawable/login_bk"
+
+    android:layout_height="match_parent"
+    android:layout_width="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.317">
 
+
+        <TextView
+            style="@style/loginHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/register" />
+
+
+        <EditText
+            android:id="@+id/editTextAccount"
+            style="@style/modifiedEditText"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:autofillHints=""
+            android:hint="@string/account"
+            android:inputType="textPersonName"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/editTextUsername"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:hint="username"/>
+            style="@style/modifiedEditText"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:autofillHints=""
+            android:hint="@string/username"
+            android:inputType="textPersonName"
+            android:maxLines="1" />
 
         <EditText
             android:id="@+id/editTextPassword"
+            style="@style/modifiedEditText"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:autofillHints=""
+            android:hint="@string/login_password_hint"
+            android:inputType="textPassword"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/editTextEmail"
+            style="@style/modifiedEditText"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:autofillHints=""
+            android:hint="@string/login_email_hint"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/editTextPhone"
+            style="@style/modifiedEditText"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:autofillHints=""
+            android:hint="@string/phone_number"
+            android:inputType="phone"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/editTextAddress"
+            style="@style/modifiedEditText"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:autofillHints=""
+            android:hint="@string/address"
+            android:inputType="textPostalAddress"
+            android:maxLines="1" />
+
+
+        <RadioGroup
+            android:id="@+id/radioGender"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:inputType="textPassword"
-            android:hint="password"/>
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:gravity="end"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radioButtonMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/nam" />
+
+
+            <RadioButton
+                android:id="@+id/radioButtonFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/n" />
+
+        </RadioGroup>
+
+
+        <Button
+            android:id="@+id/buttonRegister"
+            style="@style/loginButton"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/register" />
+
+        <TextView
+            android:id="@+id/textViewLogin"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/signup_login_hint"
+            android:textAlignment="textEnd"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold" />
+
 
     </LinearLayout>
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-       android:layout_alignParentBottom="true"
-        android:layout_marginTop="10dp"
-        android:text="Register"
-        android:minHeight="60dp"
-        android:id="@+id/buttonRegister"/>
 
-
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

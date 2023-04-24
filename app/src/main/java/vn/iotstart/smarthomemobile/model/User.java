@@ -8,13 +8,13 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String avatar;
-    private boolean gender;
+    private String gender;
     private String email;
     private String phoneNumber;
     private String address;
 
     public User(String id, String username, String password,
-                 String avatar, boolean gender, String email,
+                 String avatar, String gender, String email,
                 String phoneNumber, String address) {
         this.id = id;
         this.username = username;
@@ -53,11 +53,11 @@ public class User implements Serializable {
         this.password = password;
     }
 
-    public boolean isGender() {
+    public String isGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
