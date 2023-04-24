@@ -58,58 +58,6 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-
-
-//    private void createUserAccount() {
-//
-//        String usera = String.valueOf(username.getText());
-//        String pass = String.valueOf(password.getText());
-//
-//        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
-//
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl("http://192.168.1.8:8085/")
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .client(httpClient.build())
-//                .build();
-//
-//        ApiService apiService = retrofit.create(ApiService.class);
-//
-//        User user = new User("123ad", usera, pass, "https://haycafe.vn/wp-content/uploads/2022/02/Avatar-trang-den.png", true, "email", "0", "DiaChi");
-//
-//        Log.d("TAG", "User name: " + user.getId());
-//        Log.d("TAG", "User pass: " + user.getUsername());
-//
-//        try {
-//            Call<User> call = apiService.createUser(user);
-//            call.enqueue(new Callback<User>() {
-//                @Override
-//                public void onResponse(@Nullable Call<User> call, @Nullable Response<User> response) {
-//                    if (response != null && response.isSuccessful()) {
-//                        User userCall = response.body();
-//                        if (userCall != null) {
-//                            Log.d("TAG", "User created: " + userCall.getId());
-//                        }
-//                        else {
-//                            Log.d("TAG", "User created: null");
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(@Nullable Call<User> call, @Nullable Throwable t) {
-//                    Log.e("TAG", "Failed to create user", t);
-//
-//                }
-//            });
-//        } catch (Exception e) {
-//            Log.e("TAG", "Exception occurred when creating user", e);
-//        }
-//    }
-
-
-
-
     private void registerUser() {
         String user = String.valueOf(username.getText());
         String pass = String.valueOf(password.getText());
@@ -137,7 +85,16 @@ public class RegisterActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     User user = response.body();
                     if (user != null) {
-                        startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+
+
+                        Log.d("TAG", "User: " + user.toString());
+
+                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("userA", user);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
+
                     } else {
                         Toast.makeText(getApplicationContext(), "User is null", Toast.LENGTH_SHORT).show();
                     }
