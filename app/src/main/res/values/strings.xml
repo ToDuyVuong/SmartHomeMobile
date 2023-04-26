@@ -17,4 +17,16 @@
     <string name="nam">Nam</string>
     <string name="n">Nữ</string>
     <string name="signup">Signup</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="forgot">Forgot</string>
+    <string name="account_forgot_password">Account Forgot Password:</string>
+    <string name="otp_code">OTP CODE</string>
+    <string name="otp_code_in_email_you">OTP code in email you:</string>
+    <string name="otp_c">OTP Code</string>
+    <string name="account_forgot">Account Forgot:</string>
+    <string name="new_password">New Password:</string>
+    <string name="confirm_new_password">Confirm New Password:</string>
+    <string name="comfirm_new_password">Comfirm New Password</string>
+    <string name="btn_new_password">New Password</string>
+    <string name="btn_otp_code">Otp Code</string>
 </resources>

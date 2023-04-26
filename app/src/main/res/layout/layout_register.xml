@@ -26,22 +26,22 @@
         app:layout_constraintVertical_bias="0.317">
 
 
-<!--        <TextView-->
-<!--            style="@style/loginHeader"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="@dimen/loginViewsMargin"-->
-<!--            android:text="@string/register" />-->
+        <TextView
+            style="@style/loginHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/forgot_password" />
 
 
-<!--        <EditText-->
-<!--            android:id="@+id/editTextAccount"-->
-<!--            style="@style/modifiedEditText"-->
-<!--            android:layout_marginTop="@dimen/loginViewsMargin"-->
-<!--            android:autofillHints=""-->
-<!--            android:hint="@string/account"-->
-<!--            android:inputType="textPersonName"-->
-<!--            android:maxLines="1" />-->
+        <EditText
+            android:id="@+id/editTextForgotPassword"
+            style="@style/modifiedEditText"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:autofillHints=""
+            android:hint="@string/account"
+            android:inputType="textPersonName"
+            android:maxLines="1" />
 
 <!--        <EditText-->
 <!--            android:id="@+id/editTextUsername"-->
@@ -115,21 +115,21 @@
 <!--        </RadioGroup>-->
 
 
-<!--        <Button-->
-<!--            android:id="@+id/buttonRegister"-->
-<!--            style="@style/loginButton"-->
-<!--            android:layout_gravity="right"-->
-<!--            android:layout_marginTop="@dimen/loginViewsMargin"-->
-<!--            android:text="@string/register" />-->
+        <Button
+            android:id="@+id/buttonForgotPassword"
+            style="@style/loginButton"
+            android:layout_gravity="right"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/forgot" />
 
-<!--        <TextView-->
-<!--            android:id="@+id/textViewLogin"-->
-<!--            style="@style/parent"-->
-<!--            android:layout_marginTop="@dimen/loginViewsMargin"-->
-<!--            android:text="@string/signup_login_hint"-->
-<!--            android:textAlignment="textEnd"-->
-<!--            android:textColor="@color/primaryTextColor"-->
-<!--            android:textStyle="bold" />-->
+        <TextView
+            android:id="@+id/textViewLogin"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/signup_login_hint"
+            android:textAlignment="textEnd"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold" />
 
 
     </LinearLayout>
