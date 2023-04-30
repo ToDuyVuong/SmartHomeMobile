@@ -17,7 +17,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vn.iotstart.smarthomemobile.ApiService;
+import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.R;
 
@@ -105,7 +105,7 @@ public class AccountForgotActivity extends AppCompatActivity {
 //            }
 //        });
 
-        ApiService.apiSevice.forgotPassword(Account).enqueue(new Callback<List<String>>() {
+        ApiService.apiService.forgotPassword(Account).enqueue(new Callback<List<String>>() {
 
 
             @Override

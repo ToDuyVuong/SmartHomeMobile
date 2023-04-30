@@ -11,10 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import vn.iotstart.smarthomemobile.ApiService;
+import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.R;
 
@@ -69,7 +66,7 @@ public class NewPassword extends AppCompatActivity {
             Intent intent = getIntent();
             String id = intent.getSerializableExtra("id").toString();
 
-            ApiService.apiSevice.newForgotPassword(id, newPassword).enqueue(new retrofit2.Callback<String>() {
+            ApiService.apiService.newForgotPassword(id, newPassword).enqueue(new retrofit2.Callback<String>() {
                 @Override
                 public void onResponse(retrofit2.Call<String> call, retrofit2.Response<String> response) {
                     if (response.isSuccessful()) {
