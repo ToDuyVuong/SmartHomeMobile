@@ -31,7 +31,7 @@
         <EditText
                 android:id="@+id/editTextLoginAccount"
                 style="@style/modifiedEditText"
-                android:hint="@string/login_email_hint"
+                android:hint="@string/account"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"/>
 

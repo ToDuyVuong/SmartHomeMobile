@@ -40,11 +40,11 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = editTextAccount.getText().toString();
+                String id = editTextAccount.getText().toString();
                 String password = editTextPassword.getText().toString();
 
-                if (TextUtils.isEmpty(email)){
-                    editTextAccount.setError("Please enter your email");
+                if (TextUtils.isEmpty(id)){
+                    editTextAccount.setError("Please enter your account");
                     editTextAccount.requestFocus();
                     return;
                 }
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                 progressBarLogin.setVisibility(View.VISIBLE);
 
                 User user = new User();
-                user.setEmail(email);
+                user.setId(id);
                 user.setPassword(password);
 
                 loginUser(user);
@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
         if (!preManager.isUserLogout()){
             editTextAccount.setText(preManager.getId());
             editTextPassword.setText("12345678");
+            editTextPassword.setFocusable(false);
         }
 
         progressBarLogin.setVisibility(View.GONE);
