@@ -162,8 +162,8 @@ public class RegisterActivity extends AppCompatActivity {
     private void anhXa() {
         account = findViewById(R.id.editTextAccount);
         username = findViewById(R.id.editTextUsername);
-        password = findViewById(R.id.editTextPassword);
-        email = findViewById(R.id.editTextEmail);
+        password = findViewById(R.id.editTextLoginPassword);
+        email = findViewById(R.id.editTextLoginAccount);
         phone = findViewById(R.id.editTextPhone);
         address = findViewById(R.id.editTextAddress);
         gender = findViewById(R.id.radioGender);

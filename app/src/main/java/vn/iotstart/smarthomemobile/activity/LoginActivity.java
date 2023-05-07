@@ -1,5 +1,6 @@
 package vn.iotstart.smarthomemobile.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -7,24 +8,28 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.*;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import org.w3c.dom.Text;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstart.smarthomemobile.MainActivity;
+import vn.iotstart.smarthomemobile.PreManager;
 import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.model.User;
 import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText editTextEmail;
+    EditText editTextAccount;
     EditText editTextPassword;
     Button buttonLogin;
     TextView textViewSignup;
     TextView textViewForgotPassword;
     ProgressBar progressBarLogin;
+    PreManager preManager;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -35,12 +40,12 @@ public class LoginActivity extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = editTextEmail.getText().toString();
+                String email = editTextAccount.getText().toString();
                 String password = editTextPassword.getText().toString();
 
                 if (TextUtils.isEmpty(email)){
-                    editTextEmail.setError("Please enter your email");
-                    editTextEmail.requestFocus();
+                    editTextAccount.setError("Please enter your email");
+                    editTextAccount.requestFocus();
                     return;
                 }
                 if (TextUtils.isEmpty(password)){
@@ -55,28 +60,53 @@ public class LoginActivity extends AppCompatActivity {
                 user.setPassword(password);
 
                 loginUser(user);
-                progressBarLogin.setVisibility(View.GONE);
             }
         });
 
+
+        textViewSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //start activity login
+
+            }
+        });
+
+        textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //start activity forgot password
+            }
+        });
     }
 
     private void mapping(){
-        editTextEmail = (EditText) findViewById(R.id.editTextLoginEmail);
+        editTextAccount = (EditText) findViewById(R.id.editTextLoginAccount);
         editTextPassword = (EditText) findViewById(R.id.editTextLoginPassword);
         textViewSignup = (TextView) findViewById(R.id.textViewSignup);
         textViewForgotPassword = (TextView) findViewById(R.id.textViewForgotPassword);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
         progressBarLogin = (ProgressBar) findViewById(R.id.progressBarLogin);
+        preManager = new PreManager(getApplicationContext());
+
+        if (!preManager.isUserLogout()){
+            editTextAccount.setText(preManager.getId());
+            editTextPassword.setText("12345678");
+        }
 
         progressBarLogin.setVisibility(View.GONE);
     }
 
         private void loginUser(User user){
+            if (!preManager.isUserLogout()){
+                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, IndexActivity.class));
+            }
+
             ApiService.apiService.login(user).enqueue(new Callback<LoginResponse>() {
                 @Override
-                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-
+                public void onResponse(@NonNull Call<LoginResponse> call,@NonNull Response<LoginResponse> response) {
+                    progressBarLogin.setVisibility(View.GONE);
                     if (response.isSuccessful()){
                         LoginResponse loginResponse = response.body();
                         if (TextUtils.equals(loginResponse.getMessage(),"Not Found")){
@@ -88,18 +118,20 @@ public class LoginActivity extends AppCompatActivity {
                             return;
                         }
                         else if (TextUtils.equals(loginResponse.getMessage(), "Success")){
-                            Toast.makeText(LoginActivity.this, loginResponse.getUser().toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                            preManager.saveUserDetail(loginResponse.getUser());
+                            startActivity(new Intent(LoginActivity.this, IndexActivity.class));
                         }
                     }
                 }
 
                 @Override
-                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                public void onFailure(@NonNull Call<LoginResponse> call,@NonNull Throwable t) {
+                    progressBarLogin.setVisibility(View.GONE);
+
                     Toast.makeText(LoginActivity.this,"An error occur! Please try again", Toast.LENGTH_SHORT).show();
                     Log.d("hello", "onFailure: " + t.getMessage());
                 }
             });
-
         }
-
 }
