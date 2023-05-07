@@ -8,21 +8,19 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.*;
 import vn.iotstart.smarthomemobile.model.Category;
 import vn.iotstart.smarthomemobile.model.Product;
 import vn.iotstart.smarthomemobile.model.User;
+import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public interface ApiService {
 
-    public static final String BASE_URL = "http://192.168.1.8:8085";
+    public static final String BASE_URL = "http://192.168.1.4:8085";
 
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
 
-    ApiService apiService = new Retrofit.Builder()
+    public static final ApiService apiService = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build().create(ApiService.class);
@@ -32,6 +30,8 @@ public interface ApiService {
     @POST("/user/register")
     Call<User> register(@Body User user);
 
+    @POST("/user/login")
+    Call<LoginResponse> login(@Body User user);
 
     //    @GET("/forgot/password")
 //    Call<String> forgotPassword(@Query("id") String id);

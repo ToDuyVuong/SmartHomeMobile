@@ -7,8 +7,6 @@ public class RetrofitClient {
     public static RetrofitClient retrofitClient;
     private static Retrofit retrofit = null;
 
-
-
 //    public static RetrofitClient getInstance() {
 //        if (retrofitClient == null) {
 //            retrofitClient = new RetrofitClient();
@@ -36,7 +34,4 @@ public class RetrofitClient {
         }
         return retrofit;
     }
-
-
-
 }

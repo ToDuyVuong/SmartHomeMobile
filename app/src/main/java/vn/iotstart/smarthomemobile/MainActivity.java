@@ -1,11 +1,16 @@
 package vn.iotstart.smarthomemobile;
 
+import android.content.Intent;
+import android.view.Window;
+import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatDelegate;
+import vn.iotstart.smarthomemobile.activity.LoginActivity;
 import vn.iotstart.smarthomemobile.model.User;
 
 public class MainActivity extends AppCompatActivity {

@@ -146,7 +146,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }else {
                         Toast.makeText(getApplicationContext(), "Account already exists", Toast.LENGTH_SHORT).show();
                     }
-
                 }
             }
 
