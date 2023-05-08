@@ -61,7 +61,13 @@ public class CategoryToProductActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 productList = response.body();
-                Log.e("ffff", productList.toString());
+                try {
+                    Log.e("ffff", productList.get(0).toString());
+                }
+                catch (Exception e)
+                {
+                    Log.e("ffff", e.toString());
+                }
                 productCategoryAdapter=new CategoryToProductAdapter(productList,CategoryToProductActivity.this);
                 rcProduct.setHasFixedSize(true);
                 GridLayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),2);

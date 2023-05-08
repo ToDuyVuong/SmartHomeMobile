@@ -33,8 +33,6 @@ public interface ApiService {
     @POST("/user/login")
     Call<LoginResponse> login(@Body User user);
 
-    //    @GET("/forgot/password")
-//    Call<String> forgotPassword(@Query("id") String id);
     @GET("/forgot/password")
     Call<List<String>> forgotPassword(@Query("id") String id);
 
@@ -50,5 +48,7 @@ public interface ApiService {
     @GET("product/getProductByCategory")
     Call<List<Product>> getProductByCategoryId(@Query("categoryId") String categoryId);
 
+    @GET("product/productDetail")
+    Call<Product> getProductDetail(@Query("productId") String productId);
 
 }

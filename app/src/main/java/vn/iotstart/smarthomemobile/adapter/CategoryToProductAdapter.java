@@ -21,6 +21,7 @@ import java.util.List;
 
 import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.activity.ProductDetailActivity;
 import vn.iotstart.smarthomemobile.model.Product;
 
 public class CategoryToProductAdapter extends RecyclerView.Adapter<CategoryToProductAdapter.MyViewHolder>{
@@ -67,9 +68,9 @@ public class CategoryToProductAdapter extends RecyclerView.Adapter<CategoryToPro
             @Override
             public void onClick(View view) {
                     Toast.makeText(context,"Bạn đã chọn product"+holder.tenSp.getText().toString(), Toast.LENGTH_SHORT).show();
-//                Intent intent = new Intent(context, MainActivity.class);
-////                intent.putExtra("id", product.getIdMeal());
-//                holder.itemView.getContext().startActivity(intent);
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("id", product.getProductId());
+                holder.itemView.getContext().startActivity(intent);
             }
         });
     }
