@@ -47,5 +47,8 @@ public interface ApiService {
     @GET("product/getProductPupularIndex")
     Call<List<Product>> getProductPupularIndex();
 
+    @GET("product/getProductByCategory")
+    Call<List<Product>> getProductByCategoryId(@Query("categoryId") String categoryId);
+
 
 }

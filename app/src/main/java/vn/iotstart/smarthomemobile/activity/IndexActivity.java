@@ -34,14 +34,13 @@ public class IndexActivity extends AppCompatActivity {
     private RecyclerView recyclerViewProductPopularIndexList;
     private TextView userName;
     private ImageView avatar;
-//    ApiService apiService;
     private List<Category> categoriesList;
     private  List<Product> productList;
     boolean isDoubleClicked=false;
 
     Handler handler=new Handler();
 
-//    String urlRoot = contants.ROOT_URL;
+
 
 
     @Override
@@ -56,7 +55,6 @@ public class IndexActivity extends AppCompatActivity {
         String urlImage = "https://res.cloudinary.com/dh6r8je7l/image/upload/v1682876362/a/Avatar-trang-den_qlhteg.png";
         Glide.with(getApplicationContext()).load(urlImage).into(avatar);
 
-//        Log.e("urlRoot", urlRoot);
 
         recyclerViewCategory();
 
@@ -93,12 +91,7 @@ public class IndexActivity extends AppCompatActivity {
         recyclerViewCategoryList = findViewById(R.id.recyclerViewCategory);
         recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
 
-        //Get API
 
-//        ApiService apiService = RetrofitClient.getRetrofit(urlRoot).create(ApiService.class);
-//        apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
-//
-//        ApiService apiService = RetrofitClient.getRetrofit(urlRoot).create(ApiService.class);
         ApiService.apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, retrofit2.Response<List<Category>> response) {

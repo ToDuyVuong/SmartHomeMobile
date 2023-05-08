@@ -16,7 +16,7 @@
         android:usesCleartextTraffic="true">
 
 <activity android:name=".activity.forgotpassword.NewPassword"/>
-        
+        <activity android:name=".activity.CategoryToProductActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".activity.forgotpassword.OtpCodeForgotActivity" />
         <activity android:name=".activity.forgotpassword.AccountForgotActivity" />
