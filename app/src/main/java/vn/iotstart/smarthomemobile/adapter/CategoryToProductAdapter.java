@@ -1,8 +1,6 @@
 package vn.iotstart.smarthomemobile.adapter;
 
 
-
-
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,7 +22,7 @@ import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.activity.ProductDetailActivity;
 import vn.iotstart.smarthomemobile.model.Product;
 
-public class CategoryToProductAdapter extends RecyclerView.Adapter<CategoryToProductAdapter.MyViewHolder>{
+public class CategoryToProductAdapter extends RecyclerView.Adapter<CategoryToProductAdapter.MyViewHolder> {
     List<Product> array;
     Context context;
 
@@ -36,23 +34,25 @@ public class CategoryToProductAdapter extends RecyclerView.Adapter<CategoryToPro
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item_product,null);
-        MyViewHolder myViewHolder=new MyViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item_product, null);
+        MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         public ImageView images;
         public TextView tenSp;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            images=itemView.findViewById(R.id.image_product);
-            tenSp=itemView.findViewById(R.id.tvNameProduct);
+            images = itemView.findViewById(R.id.image_product);
+            tenSp = itemView.findViewById(R.id.tvNameProduct);
 
         }
     }
+
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder,int position){
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Product product = array.get(position);
         holder.tenSp.setText(product.getName());
 
@@ -67,13 +67,16 @@ public class CategoryToProductAdapter extends RecyclerView.Adapter<CategoryToPro
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Toast.makeText(context,"Bạn đã chọn product"+holder.tenSp.getText().toString(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Bạn đã chọn product" + holder.tenSp.getText().toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ProductDetailActivity.class);
                 intent.putExtra("id", product.getProductId());
                 holder.itemView.getContext().startActivity(intent);
             }
         });
     }
+
     @Override
-    public int getItemCount(){return array==null?0:array.size();}
+    public int getItemCount() {
+        return array == null ? 0 : array.size();
+    }
 }

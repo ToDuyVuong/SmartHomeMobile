@@ -2,11 +2,13 @@ package vn.iotstart.smarthomemobile.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,6 +18,8 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.activity.ProductDetailActivity;
+import vn.iotstart.smarthomemobile.activity.ProductViewPager2Activity;
 import vn.iotstart.smarthomemobile.model.Product;
 
 public class ProductPopularIndexAdapter extends RecyclerView.Adapter<ProductPopularIndexAdapter.ViewHolder> {
@@ -46,6 +50,22 @@ public class ProductPopularIndexAdapter extends RecyclerView.Adapter<ProductPopu
         Glide.with(context)
                 .load(products.get(position).getImages().get(0).getImage())
                 .into(holder.image);
+
+
+//        Toast.makeText(context, "Bạn đã chọn product" + holder.title.getText().toString(), Toast.LENGTH_SHORT).show();
+//        Intent intent = new Intent(context, ProductViewPager2Activity.class);
+//        intent.putExtra("productId", products.get(position).getProductId());
+//        holder.itemView.getContext().startActivity(intent);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Bạn đã chọn product" + holder.title.getText().toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ProductViewPager2Activity.class);
+                intent.putExtra("productId", products.get(position).getProductId().toString());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
 

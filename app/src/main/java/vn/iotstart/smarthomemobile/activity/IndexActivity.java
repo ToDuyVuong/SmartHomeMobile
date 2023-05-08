@@ -1,10 +1,12 @@
 package vn.iotstart.smarthomemobile.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -74,6 +76,10 @@ public class IndexActivity extends AppCompatActivity {
                     productList=response.body();
                     adapterProductPopularIndex = new ProductPopularIndexAdapter(productList, IndexActivity.this);
                     recyclerViewProductPopularIndexList.setAdapter(adapterProductPopularIndex);
+
+
+
+
                 }else{
                     int statusCode=response.code();
                 }
