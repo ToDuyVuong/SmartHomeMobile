@@ -90,20 +90,14 @@ public class LoginActivity extends AppCompatActivity {
         preManager = new PreManager(getApplicationContext());
 
         if (!preManager.isUserLogout()){
-            editTextAccount.setText(preManager.getId());
-            editTextPassword.setText("12345678");
-            editTextPassword.setFocusable(false);
+            startActivity(new Intent(LoginActivity.this, IndexActivity.class));
+            return;
         }
 
         progressBarLogin.setVisibility(View.GONE);
     }
 
         private void loginUser(User user){
-            if (!preManager.isUserLogout()){
-                Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(this, IndexActivity.class));
-            }
-
             ApiService.apiService.login(user).enqueue(new Callback<LoginResponse>() {
                 @Override
                 public void onResponse(@NonNull Call<LoginResponse> call,@NonNull Response<LoginResponse> response) {
@@ -131,7 +125,7 @@ public class LoginActivity extends AppCompatActivity {
                     progressBarLogin.setVisibility(View.GONE);
 
                     Toast.makeText(LoginActivity.this,"An error occur! Please try again", Toast.LENGTH_SHORT).show();
-                    Log.d("hello", "onFailure: " + t.getMessage());
+
                 }
             });
         }

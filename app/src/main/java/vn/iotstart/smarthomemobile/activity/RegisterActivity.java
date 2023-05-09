@@ -166,7 +166,7 @@ public class RegisterActivity extends AppCompatActivity {
         email = findViewById(R.id.editTextLoginAccount);
         phone = findViewById(R.id.editTextPhone);
         address = findViewById(R.id.editTextAddress);
-        gender = findViewById(R.id.radioGender);
+        gender = findViewById(R.id.radioProfileGender);
         textViewLogin = findViewById(R.id.textViewLogin);
         buttonRegister = findViewById(R.id.buttonRegister);
     }

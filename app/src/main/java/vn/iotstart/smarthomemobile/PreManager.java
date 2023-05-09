@@ -35,4 +35,21 @@ public class PreManager {
         boolean isPasswordEmpty = sharedPreferences.getString("password", "").isEmpty();
         return isAccountEmpty || isPasswordEmpty;
     }
+    public User getUser(){
+        User user = new User();
+
+        if (!isUserLogout()){
+            SharedPreferences sharedPreferences = context.getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
+            user.setId(sharedPreferences.getString("id", ""));
+            user.setPassword(sharedPreferences.getString("password", ""));
+            user.setEmail(sharedPreferences.getString("email", ""));
+            user.setGender(sharedPreferences.getString("gender", ""));
+            user.setAddress(sharedPreferences.getString("address", ""));
+            user.setPhoneNumber(sharedPreferences.getString("phoneNumber", ""));
+            user.setUsername(sharedPreferences.getString("username", ""));
+            user.setAvatar(sharedPreferences.getString("avatar", ""));
+        }
+
+        return user;
+    }
 }

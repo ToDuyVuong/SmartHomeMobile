@@ -33,6 +33,9 @@ public interface ApiService {
     @POST("/user/login")
     Call<LoginResponse> login(@Body User user);
 
+    @POST("/user/update")
+    Call<User> update(@Body User user);
+
     //    @GET("/forgot/password")
 //    Call<String> forgotPassword(@Query("id") String id);
     @GET("/forgot/password")
