@@ -19,7 +19,6 @@ import java.util.List;
 
 import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.activity.ProductDetailActivity;
-import vn.iotstart.smarthomemobile.activity.ProductViewPager2Activity;
 import vn.iotstart.smarthomemobile.model.Product;
 
 public class ProductPopularIndexAdapter extends RecyclerView.Adapter<ProductPopularIndexAdapter.ViewHolder> {
@@ -36,7 +35,7 @@ public class ProductPopularIndexAdapter extends RecyclerView.Adapter<ProductPopu
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_product_popular_index, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_popular_index, parent, false);
 
         return new ViewHolder(inflate);
     }
@@ -61,7 +60,7 @@ public class ProductPopularIndexAdapter extends RecyclerView.Adapter<ProductPopu
             @Override
             public void onClick(View view) {
                 Toast.makeText(context, "Bạn đã chọn product" + holder.title.getText().toString(), Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(context, ProductViewPager2Activity.class);
+                Intent intent = new Intent(context, ProductDetailActivity.class);
                 intent.putExtra("productId", products.get(position).getProductId().toString());
                 holder.itemView.getContext().startActivity(intent);
             }

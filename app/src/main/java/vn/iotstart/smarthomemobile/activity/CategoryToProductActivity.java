@@ -48,8 +48,6 @@ public class CategoryToProductActivity extends AppCompatActivity {
         tvBackHome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 =new Intent(CategoryToProductActivity.this, IndexActivity.class);
-                startActivity(intent1);
                 finish();
             }
         });

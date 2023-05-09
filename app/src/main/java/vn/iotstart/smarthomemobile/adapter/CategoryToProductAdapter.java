@@ -34,7 +34,7 @@ public class CategoryToProductAdapter extends RecyclerView.Adapter<CategoryToPro
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_item_product, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_to_product, null);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -69,7 +69,7 @@ public class CategoryToProductAdapter extends RecyclerView.Adapter<CategoryToPro
             public void onClick(View view) {
                 Toast.makeText(context, "Bạn đã chọn product" + holder.tenSp.getText().toString(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, ProductDetailActivity.class);
-                intent.putExtra("id", product.getProductId());
+                intent.putExtra("productId", product.getProductId().toString());
                 holder.itemView.getContext().startActivity(intent);
             }
         });

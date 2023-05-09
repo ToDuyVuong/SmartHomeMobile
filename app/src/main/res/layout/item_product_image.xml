@@ -3,4 +3,11 @@
     android:id="@+id/image_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scaleType="centerCrop" />
+    android:paddingBottom="20dp"
+    android:paddingEnd="20dp"
+    android:paddingStart="20dp"
+    android:paddingTop="20dp"
+    android:scaleType="centerCrop"
+    android:background="@drawable/border"
+    android:clipToOutline="true"
+    android:outlineProvider="background" />

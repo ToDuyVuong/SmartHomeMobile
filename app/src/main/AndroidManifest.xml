@@ -22,7 +22,7 @@
         <activity android:name=".activity.forgotpassword.OtpCodeForgotActivity" />
         <activity android:name=".activity.forgotpassword.AccountForgotActivity" />
         <activity android:name=".activity.ProductDetailActivity" />
-        <activity android:name=".activity.ProductViewPager2Activity" />
+        <activity android:name=".activity.RegisterActivity" />
 
         <activity
             android:name=".activity.LoginActivity"
