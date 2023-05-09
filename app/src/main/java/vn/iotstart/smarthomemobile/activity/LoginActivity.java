@@ -18,6 +18,7 @@ import retrofit2.Response;
 import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.PreManager;
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.activity.forgotpassword.AccountForgotActivity;
 import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.model.User;
 import vn.iotstart.smarthomemobile.response.LoginResponse;
@@ -67,7 +68,8 @@ public class LoginActivity extends AppCompatActivity {
         textViewSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //start activity login
+                Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
 
             }
         });
@@ -75,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
         textViewForgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //start activity forgot password
+                Intent intent = new Intent(LoginActivity.this, AccountForgotActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.*;
+import vn.iotstart.smarthomemobile.model.Cart;
 import vn.iotstart.smarthomemobile.model.Category;
 import vn.iotstart.smarthomemobile.model.Product;
 import vn.iotstart.smarthomemobile.model.User;
@@ -16,7 +17,7 @@ import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public interface ApiService {
 
-    public static final String BASE_URL = "http://192.168.146.107:8085";
+    public static final String BASE_URL = "http://192.168.1.8:8085";
 
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
 
@@ -33,11 +34,14 @@ public interface ApiService {
     @POST("/user/login")
     Call<LoginResponse> login(@Body User user);
 
+<<<<<<< HEAD
     @POST("/user/update")
     Call<User> update(@Body User user);
 
     //    @GET("/forgot/password")
 //    Call<String> forgotPassword(@Query("id") String id);
+=======
+>>>>>>> 682b90e306700e294526812655cbdf74208b6615
     @GET("/forgot/password")
     Call<List<String>> forgotPassword(@Query("id") String id);
 
@@ -49,6 +53,16 @@ public interface ApiService {
 
     @GET("product/getProductPupularIndex")
     Call<List<Product>> getProductPupularIndex();
+
+    @GET("product/getProductByCategory")
+    Call<List<Product>> getProductByCategoryId(@Query("categoryId") String categoryId);
+
+    @GET("product/productDetail")
+    Call<Product> getProductDetail(@Query("productId") String productId);
+
+    @POST("cart/add")
+    Call<List<Cart>> addCart(@Body Cart cart);
+
 
 
 }

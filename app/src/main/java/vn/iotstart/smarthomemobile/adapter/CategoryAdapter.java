@@ -2,6 +2,7 @@ package vn.iotstart.smarthomemobile.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.activity.CategoryToProductActivity;
 import vn.iotstart.smarthomemobile.activity.test.TestActivity;
 import vn.iotstart.smarthomemobile.model.Category;
 import vn.iotstart.smarthomemobile.model.Product;
@@ -39,7 +41,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.viewholder_category, parent, false);
+        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_index, parent, false);
         return new ViewHolder(inflate);
     }
 
@@ -54,15 +56,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 .load(category.get(position).getImage())
                 .into(holder.categoryImage);
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(holder.itemView.getContext(), TestActivity.class);
-//                intent.putExtra("idCategory", holder.categoryId.getText().toString());
-//                intent.putExtra("CategoryName", holder.categoryName.getText().toString());
-//                holder.itemView.getContext().startActivity(intent);
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                Log.d("CategoryAdapter", "onBindViewHolder: " + holder.categoryId.getText().toString());
+
+                Intent intent = new Intent(holder.itemView.getContext(), CategoryToProductActivity.class);
+                intent.putExtra("categoryId", holder.categoryId.getText().toString());
+                intent.putExtra("categoryName", holder.categoryName.getText().toString());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

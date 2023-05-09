@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -12,24 +13,33 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartHomeMobile"
-        tools:targetApi="31"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
 
-<activity android:name=".activity.forgotpassword.NewPassword"/>
-        
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".activity.forgotpassword.NewPassword" />
+        <activity android:name=".activity.CategoryToProductActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".activity.forgotpassword.OtpCodeForgotActivity" />
         <activity android:name=".activity.forgotpassword.AccountForgotActivity" />
-        <activity android:name=".activity.LoginActivity" android:exported="true" android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".activity.ProductDetailActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity
                 android:name=".activity.ProfileActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
+=======
+>>>>>>> 682b90e306700e294526812655cbdf74208b6615
 
         <activity
             android:name=".activity.IndexActivity"

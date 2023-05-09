@@ -46,7 +46,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //if user pressed on textview that already register open LoginActivity
                 finish();
-                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+//                startActivity(new Intent(RegisterActivity.this, MainActivity.class));
             }
         });
 

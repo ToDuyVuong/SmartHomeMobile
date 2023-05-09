@@ -48,7 +48,7 @@ public class AccountForgotActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //if user pressed on textview that already register open LoginActivity
                 finish();
-                startActivity(new Intent(AccountForgotActivity.this, MainActivity.class));
+//                startActivity(new Intent(AccountForgotActivity.this, MainActivity.class));
             }
         });
 //
