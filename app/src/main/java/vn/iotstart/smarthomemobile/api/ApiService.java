@@ -9,6 +9,7 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.*;
+import vn.iotstart.smarthomemobile.model.Cart;
 import vn.iotstart.smarthomemobile.model.Category;
 import vn.iotstart.smarthomemobile.model.Product;
 import vn.iotstart.smarthomemobile.model.User;
@@ -50,5 +51,10 @@ public interface ApiService {
 
     @GET("product/productDetail")
     Call<Product> getProductDetail(@Query("productId") String productId);
+
+    @POST("cart/add")
+    Call<List<Cart>> addCart(@Body Cart cart);
+
+
 
 }

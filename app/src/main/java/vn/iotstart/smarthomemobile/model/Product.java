@@ -12,6 +12,8 @@ public class Product {
     private int quantity;
     private Category category;
 
+//    private List<OrderItem> orderItems;
+
     public Product() {
     }
 
