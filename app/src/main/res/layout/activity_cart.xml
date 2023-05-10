@@ -5,11 +5,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/background_new_order"
     tools:context=".activity.CartActivity">
+
+    <!-- Cart title -->
+    <TextView
+        android:id="@+id/textViewCartTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Cart"
+        android:gravity="center"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <!-- Username -->
+    <TextView
+        android:id="@+id/textViewUsernameToCart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Username"
+        android:textSize="16sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView_cart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:padding="10dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <CheckBox
+            android:id="@+id/checkboxSelectAllProductsToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:layout_gravity="center_vertical"
+            android:text="Select All" />
+
+        <!-- Quantity of selected products -->
+        <TextView
+            android:id="@+id/textViewSelectedProductCountTocCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="Selected Product Count: 0"
+            android:textStyle="bold" />
+
+        <!-- Total quantity in the cart -->
+        <TextView
+            android:id="@+id/textViewTotalQuantityToCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="Total Quantity: 0"
+            android:textStyle="bold" />
+
+        <!-- Total price in the cart -->
+        <TextView
+            android:id="@+id/textViewTotalPriceToCart"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="16dp"
+            android:text="Total Price: 0 VNĐ"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <Button
+            android:id="@+id/buttonOrder"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:text="Order" />
+
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:text="Back"
+            android:layout_margin="5dp" />
+
+    </LinearLayout>
 
 </LinearLayout>

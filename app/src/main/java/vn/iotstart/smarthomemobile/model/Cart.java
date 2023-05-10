@@ -6,15 +6,17 @@ public class Cart {
     private int quantity;
     private User user;
     private Product product;
+    private boolean selected;
 
     public Cart() {
     }
 
-    public Cart(Integer cartId, int quantity, User user, Product product) {
+    public Cart(Integer cartId, int quantity, User user, Product product, boolean selected) {
         this.cartId = cartId;
         this.quantity = quantity;
         this.user = user;
         this.product = product;
+        this.selected = selected;
     }
 
     public Integer getCartId() {
@@ -48,4 +50,14 @@ public class Cart {
     public void setProduct(Product product) {
         this.product = product;
     }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+
 }

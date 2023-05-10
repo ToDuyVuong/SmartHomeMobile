@@ -147,8 +147,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         cart.setUser(user); // currentUser là đối tượng User đang đăng nhập
         cart.setProduct(product);
         cart.setQuantity(count);
+        cart.setSelected(false);
 
-        ApiService.apiService.addCart(cart).enqueue(new Callback<List<Cart>>() {
+        ApiService.apiService.addProductToCart(cart).enqueue(new Callback<List<Cart>>() {
             @Override
             public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
                 Log.e("=====", "add cart successfully");

@@ -11,8 +11,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.*;
 import vn.iotstart.smarthomemobile.model.Cart;
 import vn.iotstart.smarthomemobile.model.Category;
+import vn.iotstart.smarthomemobile.model.Order;
+import vn.iotstart.smarthomemobile.model.OrderItem;
 import vn.iotstart.smarthomemobile.model.Product;
 import vn.iotstart.smarthomemobile.model.User;
+import vn.iotstart.smarthomemobile.request.OrderRequest;
 import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public interface ApiService {
@@ -57,8 +60,11 @@ public interface ApiService {
     @GET("product/productDetail")
     Call<Product> getProductDetail(@Query("productId") String productId);
 
-    @POST("cart/add")
-    Call<List<Cart>> addCart(@Body Cart cart);
+    @POST("cart/addProductToCart")
+    Call<List<Cart>> addProductToCart(@Body Cart cart);
+
+    @POST("cart/minusProductToCart")
+    Call<List<Cart>> minusProductToCart(@Body Cart cart);
 
 
     @GET("cart/view")
@@ -66,6 +72,9 @@ public interface ApiService {
 
     @DELETE("cart/remove/{cartId}")
     Call<Void> removeProductToCart(@Path("cartId") Integer cartId);
+
+    @POST("order/newOrder")
+    Call<Order> newOrder(@Body OrderRequest orderRequest);
 
 
 }

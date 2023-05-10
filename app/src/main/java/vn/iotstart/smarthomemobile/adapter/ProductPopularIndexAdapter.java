@@ -54,7 +54,7 @@ public class ProductPopularIndexAdapter extends RecyclerView.Adapter<ProductPopu
         holder.title.setText(products.get(position).getName());
         holder.fee.setText(String.valueOf(products.get(position).getPrice()));
 
-        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(products.get(position).getImages().get(0).getImage(), "drawable", holder.itemView.getContext().getPackageName());
+//        int drawableResourceId = holder.itemView.getContext().getResources().getIdentifier(products.get(position).getImages().get(0).getImage(), "drawable", holder.itemView.getContext().getPackageName());
         Glide.with(context)
                 .load(products.get(position).getImages().get(0).getImage())
                 .into(holder.image);
@@ -74,8 +74,9 @@ public class ProductPopularIndexAdapter extends RecyclerView.Adapter<ProductPopu
                 cart.setUser(user); // currentUser là đối tượng User đang đăng nhập
                 cart.setProduct(products.get(position));
                 cart.setQuantity(1);
+                cart.setSelected(false);
 
-                ApiService.apiService.addCart(cart).enqueue(new Callback<List<Cart>>() {
+                ApiService.apiService.addProductToCart(cart).enqueue(new Callback<List<Cart>>() {
                     @Override
                     public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
                         Toast.makeText(context, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();

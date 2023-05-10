@@ -2,9 +2,11 @@ package vn.iotstart.smarthomemobile.adapter;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.activity.ProductDetailActivity;
 import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.model.Cart;
 
@@ -91,11 +94,32 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 public void onClick(View v) {
                     int position = getAdapterPosition();
                     int count = Integer.parseInt(textViewQuantity.getText().toString());
-                    if (count < cartItems.get(position).getProduct().getQuantity()) {
+                    int maxQuantity = cartItems.get(position).getProduct().getQuantity();
+
+                    if (count < maxQuantity) {
                         count++;
                         textViewQuantity.setText(String.valueOf(count));
-                    }else {
-                        Toast.makeText(context, "Quantity must be less than " + cartItems.get(position).getProduct().getQuantity(), Toast.LENGTH_SHORT).show();
+                        cartItems.get(position).setQuantity(1);
+
+                        // Update cart item on the server
+                        ApiService.apiService.addProductToCart(cartItems.get(position)).enqueue(new Callback<List<Cart>>() {
+                            @Override
+                            public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
+                                if (response.isSuccessful()) {
+                                    Log.e("=====", "Update cart successfully");
+                                    Toast.makeText(context, "Update to cart successfully", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.e("=====", "Failed to update cart");
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<List<Cart>> call, Throwable t) {
+                                Log.e("=====", "Failed to update cart");
+                            }
+                        });
+                    } else {
+                        Toast.makeText(context, "Quantity must be less than " + maxQuantity, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -110,7 +134,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     if (count > 1) {
                         count--;
                         textViewQuantity.setText(String.valueOf(count));
-                    }else {
+                        // Update cart item on the server
+                        ApiService.apiService.minusProductToCart(cartItems.get(position)).enqueue(new Callback<List<Cart>>() {
+                            @Override
+                            public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
+                                if (response.isSuccessful()) {
+                                    Log.e("=====", "Update cart successfully");
+                                    Toast.makeText(context, "Update to cart successfully", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.e("=====", "Failed to update cart");
+                                }
+                            }
+                            @Override
+                            public void onFailure(Call<List<Cart>> call, Throwable t) {
+                                Log.e("=====", "Failed to update cart");
+                            }
+                        });
+                    } else {
                         Toast.makeText(context, "Quantity must be greater than 0", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -143,6 +183,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             textViewProductName.setText(cart.getProduct().getName());
             textViewQuantity.setText(String.valueOf(cart.getQuantity()));
             textViewPrice.setText(String.valueOf(cart.getProduct().getPrice()) + " VNĐ");
+
         }
     }
 }

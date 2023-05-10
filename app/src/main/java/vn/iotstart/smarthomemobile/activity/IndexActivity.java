@@ -20,6 +20,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import vn.iotstart.smarthomemobile.PreManager;
 import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.adapter.CategoryAdapter;
 import vn.iotstart.smarthomemobile.adapter.ProductPopularIndexAdapter;
@@ -43,6 +44,8 @@ public class IndexActivity extends AppCompatActivity {
 
     Handler handler=new Handler();
 
+    PreManager preManager;
+
 
 
 
@@ -53,9 +56,10 @@ public class IndexActivity extends AppCompatActivity {
 
         userName = findViewById(R.id.userName);
         avatar = findViewById(R.id.avatar);
+        preManager = new PreManager(this);
 
-        userName.setText("Hi ToDuyVuong");
-        String urlImage = "https://res.cloudinary.com/dh6r8je7l/image/upload/v1682876362/a/Avatar-trang-den_qlhteg.png";
+        userName.setText("Hi "+ preManager.getUser().getUsername());
+        String urlImage = preManager.getUser().getAvatar();
         Glide.with(getApplicationContext()).load(urlImage).into(avatar);
 
 
