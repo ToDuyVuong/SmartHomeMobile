@@ -20,9 +20,7 @@ import java.util.List;
 
 import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.activity.CategoryToProductActivity;
-import vn.iotstart.smarthomemobile.activity.test.TestActivity;
 import vn.iotstart.smarthomemobile.model.Category;
-import vn.iotstart.smarthomemobile.model.Product;
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+    <ImageView
+        android:id="@+id/imageViewProductImageToCart"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_launcher_background"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="16dp">
+
+        <TextView
+            android:id="@+id/textViewProductNameToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Title"/>
+
+        <TextView
+            android:id="@+id/textViewProductPriceToCart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Product Price"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <ImageButton
+                android:id="@+id/buttonMinusProductQuantityToCart"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                app:srcCompat="@drawable/minus" />
+
+<!--            <TextView-->
+<!--                android:id="@+id/textViewProductQuantityToCart"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginStart="8dp"-->
+<!--                android:layout_marginEnd="8dp"-->
+<!--                android:text="1"/>-->
+
+            <TextView
+                android:id="@+id/textViewProductQuantityToCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="1"
+                android:textSize="22sp"
+                tools:layout_editor_absoluteX="185dp"
+                tools:layout_editor_absoluteY="515dp"
+                tools:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/buttonPlusProductQuantityToCart"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:srcCompat="@drawable/plus"
+                android:background="?attr/selectableItemBackgroundBorderless"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/buttonRemoveProductToCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+</LinearLayout>
+
+
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="wrap_content"-->
+<!--    android:orientation="horizontal"-->
+<!--    android:padding="16dp">-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageViewProductImageToCart"-->
+<!--        android:layout_width="100dp"-->
+<!--        android:layout_height="100dp"-->
+<!--        android:src="@drawable/ic_launcher_background"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/textViewProductNameToCart"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_weight="1"-->
+<!--        android:text="Product Title"/>-->
+
+<!--    <ImageButton-->
+<!--        android:id="@+id/buttonRemoveProductToCart"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@android:drawable/ic_menu_close_clear_cancel" />-->
+
+<!--</LinearLayout>-->

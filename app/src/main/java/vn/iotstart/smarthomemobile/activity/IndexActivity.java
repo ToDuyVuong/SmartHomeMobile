@@ -7,14 +7,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
@@ -22,11 +21,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstart.smarthomemobile.R;
-import vn.iotstart.smarthomemobile.adapter.ProductPopularIndexAdapter;
-import vn.iotstart.smarthomemobile.api.RetrofitClient;
 import vn.iotstart.smarthomemobile.adapter.CategoryAdapter;
+import vn.iotstart.smarthomemobile.adapter.ProductPopularIndexAdapter;
 import vn.iotstart.smarthomemobile.api.ApiService;
-import vn.iotstart.smarthomemobile.api.contants;
 import vn.iotstart.smarthomemobile.model.Category;
 import vn.iotstart.smarthomemobile.model.Product;
 
@@ -38,6 +35,8 @@ public class IndexActivity extends AppCompatActivity {
     private RecyclerView recyclerViewProductPopularIndexList;
     private TextView userName;
     private ImageView avatar;
+
+    FloatingActionButton buttonCart;
     private List<Category> categoriesList;
     private  List<Product> productList;
     boolean isDoubleClicked=false;
@@ -64,6 +63,19 @@ public class IndexActivity extends AppCompatActivity {
 
         recyclerViewProductPopularIndex();
 
+
+        buttonCart = findViewById(R.id.buttonCart);
+        buttonCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexActivity.this, CartActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
         //view profile info
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +83,7 @@ public class IndexActivity extends AppCompatActivity {
                 showProfileInfo();
             }
         });
+
 
     }
 
@@ -110,7 +123,7 @@ public class IndexActivity extends AppCompatActivity {
 
         ApiService.apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
             @Override
-            public void onResponse(Call<List<Category>> call, retrofit2.Response<List<Category>> response) {
+            public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
                 if(response.isSuccessful()){
                     categoriesList=response.body();
                     adapterCategory = new CategoryAdapter(categoriesList, IndexActivity.this);

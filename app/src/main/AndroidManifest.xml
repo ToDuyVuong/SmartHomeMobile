@@ -23,6 +23,7 @@
         <activity android:name=".activity.forgotpassword.AccountForgotActivity" />
         <activity android:name=".activity.ProductDetailActivity" />
         <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.CartActivity"/>
 
         <activity
             android:name=".activity.LoginActivity"
@@ -33,13 +34,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
         <activity
                 android:name=".activity.ProfileActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-=======
->>>>>>> 682b90e306700e294526812655cbdf74208b6615
 
         <activity
             android:name=".activity.IndexActivity"

@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
-import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.activity.ProductDetailActivity;
 import vn.iotstart.smarthomemobile.model.Product;

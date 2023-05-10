@@ -34,14 +34,11 @@ public interface ApiService {
     @POST("/user/login")
     Call<LoginResponse> login(@Body User user);
 
-<<<<<<< HEAD
+
     @POST("/user/update")
     Call<User> update(@Body User user);
 
-    //    @GET("/forgot/password")
-//    Call<String> forgotPassword(@Query("id") String id);
-=======
->>>>>>> 682b90e306700e294526812655cbdf74208b6615
+
     @GET("/forgot/password")
     Call<List<String>> forgotPassword(@Query("id") String id);
 
@@ -63,6 +60,12 @@ public interface ApiService {
     @POST("cart/add")
     Call<List<Cart>> addCart(@Body Cart cart);
 
+
+    @GET("cart/view")
+    Call<List<Cart>> getCartItems(@Query("id") String id);
+
+    @DELETE("cart/remove/{cartId}")
+    Call<Void> removeProductToCart(@Path("cartId") Integer cartId);
 
 
 }

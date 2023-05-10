@@ -18,9 +18,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
