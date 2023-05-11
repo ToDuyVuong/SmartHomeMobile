@@ -1,6 +1,7 @@
 package vn.iotstart.smarthomemobile.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,13 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.activity.CategoryToProductActivity;
+import vn.iotstart.smarthomemobile.activity.OrderDetailActivity;
 import vn.iotstart.smarthomemobile.model.Order;
 
-public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> {
+public class ListOrderAdapter extends RecyclerView.Adapter<ListOrderAdapter.ViewHolder> {
     private List<Order> listOrder;
     private Context context;
 
-    public OrderAdapter(Context context, List<Order> listOrder) {
+    public ListOrderAdapter(Context context, List<Order> listOrder) {
         this.listOrder = listOrder;
         this.context = context;
     }
@@ -33,6 +36,18 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(listOrder.get(position));
+        Order currentOrder = listOrder.get(position);
+        holder.itemView.setTag(currentOrder);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(holder.itemView.getContext(), OrderDetailActivity.class);
+                intent.putExtra("orderId", holder.txtOrderId.getText().toString());
+                intent.putExtra("order", currentOrder);
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
+
     }
 
     @Override

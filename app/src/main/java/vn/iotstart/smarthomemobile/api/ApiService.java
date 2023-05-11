@@ -21,7 +21,7 @@ import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public interface ApiService {
 
-    public static final String BASE_URL = "http://10.10.153.195:8085";
+    public static final String BASE_URL = "http://192.168.1.3:8085";
 
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
 
@@ -82,6 +82,9 @@ public interface ApiService {
 
     @GET("order/test")
     Call<Map<String, String>> getTest(@Query("id") String id);
+
+    @GET("order/orderDetail")
+    Call<List<OrderItem>> getOrderDetail(@Query("orderId") String orderId);
 
 
 

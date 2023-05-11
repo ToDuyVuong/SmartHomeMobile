@@ -1,8 +1,14 @@
 package vn.iotstart.smarthomemobile.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
 import java.util.List;
 
-public class Order {
+public class Order implements Serializable {
     private Integer orderId;
     private String date;
     private String shipTo;
@@ -118,6 +124,8 @@ public class Order {
     public void setUser(User user) {
         this.user = user;
     }
+
+
 
     public enum Status {
         PENDING(0), PROCESSING(1), DELIVERING(2), DELIVERED(3), CANCELED(4);
