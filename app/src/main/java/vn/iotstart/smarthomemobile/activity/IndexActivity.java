@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -45,6 +46,9 @@ public class IndexActivity extends AppCompatActivity {
     Handler handler=new Handler();
 
     PreManager preManager;
+    TextView textViewOderSmarthome;
+
+    ImageView imageViewOder;
 
 
 
@@ -57,6 +61,7 @@ public class IndexActivity extends AppCompatActivity {
         userName = findViewById(R.id.userName);
         avatar = findViewById(R.id.avatar);
         preManager = new PreManager(this);
+        imageViewOder = findViewById(R.id.imageViewOrderIndex);
 
         userName.setText("Hi "+ preManager.getUser().getUsername());
         String urlImage = preManager.getUser().getAvatar();
@@ -68,11 +73,22 @@ public class IndexActivity extends AppCompatActivity {
         recyclerViewProductPopularIndex();
 
 
+
+        imageViewOder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexActivity.this, ListOrderActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
         buttonCart = findViewById(R.id.buttonCart);
         buttonCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(IndexActivity.this, CartActivity.class);
+
                 startActivity(intent);
             }
         });

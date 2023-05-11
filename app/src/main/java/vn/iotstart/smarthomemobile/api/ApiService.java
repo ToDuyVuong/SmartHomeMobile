@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -20,7 +21,7 @@ import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public interface ApiService {
 
-    public static final String BASE_URL = "http://192.168.1.8:8085";
+    public static final String BASE_URL = "http://10.10.153.195:8085";
 
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
 
@@ -75,6 +76,14 @@ public interface ApiService {
 
     @POST("order/newOrder")
     Call<Order> newOrder(@Body OrderRequest orderRequest);
+
+    @GET("order/listOrder")
+    Call<List<Order>> getListOrder(@Query("id") String id);
+
+    @GET("order/test")
+    Call<Map<String, String>> getTest(@Query("id") String id);
+
+
 
 
 }

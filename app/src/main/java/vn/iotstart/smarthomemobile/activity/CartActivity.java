@@ -70,7 +70,7 @@ public class CartActivity extends AppCompatActivity {
 
                     cartitems = response.body();
                     adapterCart = new CartAdapter(cartitems, CartActivity.this);
-                    textViewUsername.setText("Xin Chao: " + preManager.getId());
+                    textViewUsername.setText("Xin Chao: " + preManager.getUser().getUsername());
                     recyclerView.setAdapter(adapterCart);
                 }
             }

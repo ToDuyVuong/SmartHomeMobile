@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="3dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/rounded_corner_layout"
+        android:layout_marginStart="10dp">
+
+    <!-- Order ID -->
+    <TextView
+        android:id="@+id/textViewOrderId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:text="Order ID"
+        android:textStyle="bold"
+        android:padding="5dp"
+        android:layout_margin="5dp"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Date -->
+        <TextView
+            android:id="@+id/textViewOrderDate"
+            android:text="Date"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+
+        <!-- Status -->
+        <TextView
+            android:id="@+id/textViewOrderStatus"
+            android:text="Status"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Total Quantity -->
+        <TextView
+            android:id="@+id/textViewOrderTotalQuantity"
+            android:text="Total Quantity"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            android:layout_height="wrap_content" />
+
+    <!-- Total Price -->
+    <TextView
+        android:id="@+id/textViewOrderTotalPrice"
+        android:text="Total Price"
+        android:layout_weight="1"
+        android:textColor="@color/black"
+        android:layout_width="0dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Phone -->
+        <TextView
+            android:id="@+id/textViewOrderPhone"
+            android:text="Phone"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textColor="@color/black"
+            android:padding="5dp"
+            android:layout_height="wrap_content" />
+
+        <!-- Ship To -->
+        <TextView
+            android:id="@+id/textViewOrderShipTo"
+            android:text="Ship To"
+            android:layout_width="0dp"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <!-- Address -->
+    <TextView
+        android:id="@+id/textViewOrderAddress"
+        android:text="Address"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp" />
+
+        <!-- Note -->
+        <TextView
+            android:id="@+id/textViewOrderNote"
+            android:text="Note"
+            android:layout_weight="1"
+            android:padding="5dp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp" />
+
+
+
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

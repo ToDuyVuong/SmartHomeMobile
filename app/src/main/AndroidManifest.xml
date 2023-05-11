@@ -25,6 +25,7 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.CartActivity"/>
         <activity android:name=".activity.NewOrderActivity"/>
+        <activity android:name=".activity.ListOrderActivity"/>
 
 
         <activity

@@ -12,13 +12,13 @@ public class Order {
     private String phone;
     private Integer totalQuantity;
     private Status status;
-    private List<OrderItem> orderItems;
+//    private List<OrderItem> orderItems;
     private User user;
 
     public Order() {
     }
 
-    public Order(Integer orderId, String date, String shipTo, Long totalPrice, String note, String address, String phone, Integer totalQuantity, Status status, List<OrderItem> orderItems, User user) {
+    public Order(Integer orderId, String date, String shipTo, Long totalPrice, String note, String address, String phone, Integer totalQuantity, Status status, User user) {
         this.orderId = orderId;
         this.date = date;
         this.shipTo = shipTo;
@@ -28,7 +28,6 @@ public class Order {
         this.phone = phone;
         this.totalQuantity = totalQuantity;
         this.status = status;
-        this.orderItems = orderItems;
         this.user = user;
     }
 
@@ -104,13 +103,13 @@ public class Order {
         this.status = status;
     }
 
-    public List<OrderItem> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItem> orderItems) {
-        this.orderItems = orderItems;
-    }
+//    public List<OrderItem> getOrderItems() {
+//        return orderItems;
+//    }
+//
+//    public void setOrderItems(List<OrderItem> orderItems) {
+//        this.orderItems = orderItems;
+//    }
 
     public User getUser() {
         return user;
@@ -121,7 +120,7 @@ public class Order {
     }
 
     public enum Status {
-        PENDING(0), DELIVERING(1), DELIVERED(2), CANCELED(3);
+        PENDING(0), PROCESSING(1), DELIVERING(2), DELIVERED(3), CANCELED(4);
 
         private int value;
 
