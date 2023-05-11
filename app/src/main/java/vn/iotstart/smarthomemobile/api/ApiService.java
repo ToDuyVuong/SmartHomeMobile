@@ -86,6 +86,9 @@ public interface ApiService {
     @GET("order/orderDetail")
     Call<List<OrderItem>> getOrderDetail(@Query("orderId") String orderId);
 
+    @POST("order/cancelOrder")
+    Call<Order> cancelOrder(@Body Order order);
+
 
 
 

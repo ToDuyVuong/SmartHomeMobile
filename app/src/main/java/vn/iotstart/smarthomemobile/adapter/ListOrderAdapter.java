@@ -21,6 +21,8 @@ public class ListOrderAdapter extends RecyclerView.Adapter<ListOrderAdapter.View
     private List<Order> listOrder;
     private Context context;
 
+    private static final int REQUEST_ORDER_DETAIL = 1;
+
     public ListOrderAdapter(Context context, List<Order> listOrder) {
         this.listOrder = listOrder;
         this.context = context;

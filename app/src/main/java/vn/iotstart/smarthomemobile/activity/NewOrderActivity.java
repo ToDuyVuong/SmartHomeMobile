@@ -1,5 +1,6 @@
 package vn.iotstart.smarthomemobile.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,15 +69,34 @@ public class NewOrderActivity extends AppCompatActivity {
                 finish();
             }
         });
-        
+
         buttonOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkout(quantity, price);
+                showConfirmationDialog();
             }
         });
 
     }
+
+    private void showConfirmationDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Xác nhận đặt hàng");
+        builder.setMessage("Bạn có chắc chắn muốn đặt hàng?");
+
+        builder.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                checkout(quantity, price);
+            }
+        });
+
+        builder.setNegativeButton("Hủy", null);
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
     private void checkout(String quantity, String price) {
 
