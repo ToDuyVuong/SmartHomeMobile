@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import vn.iotstart.smarthomemobile.activity.LoginActivity;
 import vn.iotstart.smarthomemobile.api.ApiService;
-import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.R;
 
 
@@ -73,7 +73,7 @@ public class NewPassword extends AppCompatActivity {
                         Log.e("TAG", "onResponse: " + response.body());
                         Toast.makeText(getApplicationContext(), "Change password success", Toast.LENGTH_SHORT).show();
 
-                        Intent intent1 = new Intent(NewPassword.this, MainActivity.class);
+                        Intent intent1 = new Intent(NewPassword.this, LoginActivity.class);
                         startActivity(intent1);
                     } else {
                         Toast.makeText(getApplicationContext(), "Change password fail", Toast.LENGTH_SHORT).show();

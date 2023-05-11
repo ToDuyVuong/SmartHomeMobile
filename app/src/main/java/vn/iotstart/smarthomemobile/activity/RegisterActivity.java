@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vn.iotstart.smarthomemobile.MainActivity;
 import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.model.User;
@@ -138,7 +137,7 @@ public class RegisterActivity extends AppCompatActivity {
                     if (user != null) {
                         Log.d("TAG", "User: " + user.toString());
                         Toast.makeText(getApplicationContext(), "Register Success", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putSerializable("userA", user);
                         intent.putExtras(bundle);
