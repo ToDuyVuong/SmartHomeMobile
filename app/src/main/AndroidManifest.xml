@@ -38,7 +38,7 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".activity.ProfileActivity"
+                android:name=".activity.EditProfileActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
 

@@ -6,8 +6,10 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -25,7 +28,7 @@ import retrofit2.Response;
 import vn.iotstart.smarthomemobile.PreManager;
 import vn.iotstart.smarthomemobile.R;
 import vn.iotstart.smarthomemobile.adapter.CategoryAdapter;
-import vn.iotstart.smarthomemobile.adapter.CategoryToProductAdapter;
+import vn.iotstart.smarthomemobile.adapter.ProductAllIndexAdapter;
 import vn.iotstart.smarthomemobile.adapter.ProductPopularIndexAdapter;
 import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.model.Category;
@@ -44,16 +47,18 @@ public class IndexActivity extends AppCompatActivity {
 
     FloatingActionButton buttonCart;
     private List<Category> categoriesList;
-    private  List<Product> productList;
-    boolean isDoubleClicked=false;
+    private List<Product> productList;
+    boolean isDoubleClicked = false;
 
-    Handler handler=new Handler();
+    Handler handler = new Handler();
 
     PreManager preManager;
     TextView textViewOderSmarthome;
 
     ImageView imageViewOder;
-
+    List<Product> arrayListProduct = new ArrayList<>();
+    boolean isLoading = false;
+    LinearLayout buttonHome, buttonCategory, buttonProfile, buttonSetting, buttonLogout;
 
 
 
@@ -62,15 +67,7 @@ public class IndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-        userName = findViewById(R.id.userName);
-        avatar = findViewById(R.id.avatar);
-        preManager = new PreManager(this);
-        imageViewOder = findViewById(R.id.imageViewOrderIndex);
-
-        userName.setText("Hi "+ preManager.getUser().getUsername());
-        String urlImage = preManager.getUser().getAvatar();
-        Glide.with(getApplicationContext()).load(urlImage).into(avatar);
-
+        anhXa();
 
         recyclerViewCategory();
 
@@ -78,6 +75,21 @@ public class IndexActivity extends AppCompatActivity {
 
         recyclerViewProductAllIndex();
 
+        buttonProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexActivity.this, EditProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        buttonHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IndexActivity.this, IndexActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         imageViewOder.setOnClickListener(new View.OnClickListener() {
@@ -100,8 +112,6 @@ public class IndexActivity extends AppCompatActivity {
         });
 
 
-
-
         //view profile info
         avatar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +123,68 @@ public class IndexActivity extends AppCompatActivity {
 
     }
 
+    private void anhXa() {
+        userName = findViewById(R.id.userName);
+        avatar = findViewById(R.id.avatar);
+        preManager = new PreManager(this);
+        imageViewOder = findViewById(R.id.imageViewOrderIndex);
+        buttonHome = findViewById(R.id.homeBtn);
+        buttonProfile = findViewById(R.id.profileBtn);
+
+        userName.setText("Hi " + preManager.getUser().getUsername());
+        String urlImage = preManager.getUser().getAvatar();
+        Glide.with(getApplicationContext()).load(urlImage).into(avatar);
+    }
+
+    private void initScrollListener() {
+        recyclerViewProductAll.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == arrayListProduct.size() - 1) {
+                        loadMore();
+                        isLoading = true;
+                    }
+                }
+            }
+        });
+    }
+
+    private void loadMore() {
+        arrayListProduct.add(null);
+        adapterProductAllIndex.notifyItemInserted(arrayListProduct.size() - 1);
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                arrayListProduct.remove(arrayListProduct.size() - 1);
+                int scrollPosition = arrayListProduct.size();
+                adapterProductAllIndex.notifyItemRemoved(scrollPosition);
+
+                int currentSize = scrollPosition;
+                int nextLimit = currentSize + 1;
+                while (currentSize - 1 < nextLimit && currentSize - 1 < productList.size()) {
+                    arrayListProduct.add(productList.get(currentSize - 1));
+                    currentSize++;
+                }
+                if(arrayListProduct.size()%2!=0){
+
+                    arrayListProduct.add(productList.get(productList.size()-1));
+                }
+                adapterProductAllIndex.notifyDataSetChanged();
+                isLoading = false;
+            }
+        }, 2000);
+    }
+
+
     private void recyclerViewProductAllIndex() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         recyclerViewProductAll = findViewById(R.id.recyclerViewProductAll);
@@ -122,17 +194,18 @@ public class IndexActivity extends AppCompatActivity {
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
                 productList = response.body();
                 try {
-                    Log.e("ffff", productList.get(0).toString());
-                }
-                catch (Exception e)
-                {
+                    if (productList.size() > 0) {
+                        pupulateData(productList);
+                        intiAdapter();
+                        initScrollListener();
+                        Log.e("ffff", productList.get(0).toString());
+
+                    }
+                } catch (Exception e) {
                     Log.e("ffff", e.toString());
                 }
-                adapterProductAllIndex=new CategoryToProductAdapter(productList,IndexActivity.this);
-                recyclerViewProductAll.setHasFixedSize(true);
-                GridLayoutManager layoutManager=new GridLayoutManager(getApplicationContext(),2);
-                recyclerViewProductAll.setLayoutManager(layoutManager);
-                recyclerViewProductAll.setAdapter(adapterProductAllIndex);
+
+
 
             }
 
@@ -142,30 +215,42 @@ public class IndexActivity extends AppCompatActivity {
         });
     }
 
+    private void intiAdapter() {
+        adapterProductAllIndex = new ProductAllIndexAdapter(arrayListProduct, IndexActivity.this);
+        recyclerViewProductAll.setHasFixedSize(true);
+        GridLayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        recyclerViewProductAll.setLayoutManager(layoutManager);
+        recyclerViewProductAll.setAdapter(adapterProductAllIndex);
+    }
+
+    private void pupulateData(List<Product> productList) {
+        for (int i = 0; i < 2; i++) {
+            arrayListProduct.add(productList.get(i));
+        }
+    }
+
     private void recyclerViewProductPopularIndex() {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recyclerViewProductPopularIndexList = findViewById(R.id.recyclerView2);
         recyclerViewProductPopularIndexList.setLayoutManager(linearLayoutManager);
 
-        ApiService.apiService.getProductPupularIndex().enqueue(new Callback<List<Product>>() {
+        ApiService.apiService.getLatestProduct().enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                if(response.isSuccessful()){
-                    productList=response.body();
+                if (response.isSuccessful()) {
+                    productList = response.body();
                     adapterProductPopularIndex = new ProductPopularIndexAdapter(productList, IndexActivity.this);
                     recyclerViewProductPopularIndexList.setAdapter(adapterProductPopularIndex);
 
 
-
-
-                }else{
-                    int statusCode=response.code();
+                } else {
+                    int statusCode = response.code();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-                Log.d("logg",t.getMessage());
+                Log.d("logg", t.getMessage());
             }
         });
     }
@@ -179,23 +264,23 @@ public class IndexActivity extends AppCompatActivity {
         ApiService.apiService.getCategoryAll().enqueue(new Callback<List<Category>>() {
             @Override
             public void onResponse(Call<List<Category>> call, Response<List<Category>> response) {
-                if(response.isSuccessful()){
-                    categoriesList=response.body();
+                if (response.isSuccessful()) {
+                    categoriesList = response.body();
                     adapterCategory = new CategoryAdapter(categoriesList, IndexActivity.this);
                     recyclerViewCategoryList.setAdapter(adapterCategory);
-                }else{
-                    int statusCode=response.code();
+                } else {
+                    int statusCode = response.code();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Category>> call, Throwable t) {
-                Log.d("logg",t.getMessage());
+                Log.d("logg", t.getMessage());
             }
         });
     }
 
-    private void showProfileInfo(){
-        startActivity(new Intent(this, ProfileActivity.class));
+    private void showProfileInfo() {
+        startActivity(new Intent(this, EditProfileActivity.class));
     }
 }

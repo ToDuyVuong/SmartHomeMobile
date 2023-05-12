@@ -21,7 +21,7 @@ import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public interface ApiService {
 
-    public static final String BASE_URL = "http://192.168.1.3:8085";
+    public static final String BASE_URL = "http://192.168.1.6:8085";
 
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
 
@@ -31,17 +31,15 @@ public interface ApiService {
             .build().create(ApiService.class);
 
 
-    //    @FormUrlEncoded
+    //   User
     @POST("/user/register")
     Call<User> register(@Body User user);
 
     @POST("/user/login")
     Call<LoginResponse> login(@Body User user);
 
-
     @POST("/user/update")
     Call<User> update(@Body User user);
-
 
     @GET("/forgot/password")
     Call<List<String>> forgotPassword(@Query("id") String id);
@@ -49,9 +47,17 @@ public interface ApiService {
     @POST("/forgot/newpass")
     Call<String> newForgotPassword(@Query("id") String id, @Query("password") String password);
 
+
+
+
+    // Category
     @GET("/category/getAll")
     Call<List<Category>> getCategoryAll();
 
+
+
+
+    // Product
     @GET("product/getProductPupularIndex")
     Call<List<Product>> getProductPupularIndex();
 
@@ -61,6 +67,15 @@ public interface ApiService {
     @GET("product/productDetail")
     Call<Product> getProductDetail(@Query("productId") String productId);
 
+    @GET("product/search")
+    Call<List<Product>> searchProduct(@Query("keyword") String keyword);
+
+    @GET("product/getLatestProduct")
+    Call<List<Product>> getLatestProduct();
+
+
+
+    // Cart
     @POST("cart/addProductToCart")
     Call<List<Cart>> addProductToCart(@Body Cart cart);
 
@@ -74,6 +89,10 @@ public interface ApiService {
     @DELETE("cart/remove/{cartId}")
     Call<Void> removeProductToCart(@Path("cartId") Integer cartId);
 
+
+
+
+    // Order
     @POST("order/newOrder")
     Call<Order> newOrder(@Body OrderRequest orderRequest);
 
