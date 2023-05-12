@@ -165,6 +165,13 @@
                             tools:layout_editor_absoluteX="122dp"
                             tools:layout_editor_absoluteY="515dp" />
 
+<!--                        <ImageButton-->
+<!--                            android:id="@+id/buttonDecreaseQuantityToCart"-->
+<!--                            android:layout_width="30dp"-->
+<!--                            android:layout_height="30dp"-->
+<!--                            app:srcCompat="@drawable/minus"-->
+<!--                            android:background="?attr/selectableItemBackgroundBorderless"/>-->
+
 
                         <TextView
                             android:id="@+id/textViewCount"

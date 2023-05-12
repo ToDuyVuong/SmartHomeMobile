@@ -13,11 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bumptech.glide.Glide;
-
-
 import java.util.List;
-import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,9 +56,9 @@ public class ProductDetailActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String productId = (String) intent.getSerializableExtra("productId");
 
-        ApiService.apiService.getProductDetail(productId).enqueue(new retrofit2.Callback<Product>() {
+        ApiService.apiService.getProductDetail(productId).enqueue(new Callback<Product>() {
             @Override
-            public void onResponse(retrofit2.Call<Product> call, retrofit2.Response<Product> response) {
+            public void onResponse(Call<Product> call, Response<Product> response) {
                 if (response.isSuccessful()) {
                     Product product = response.body();
                     if (product != null) {
@@ -118,8 +114,7 @@ public class ProductDetailActivity extends AppCompatActivity {
 //                                int count = Integer.parseInt(tvCount.getText().toString());
                                 if (count > 0) {
                                     addProductToCart(count, product);
-                                    Toast.makeText(ProductDetailActivity.this, "Add to cart successfully", Toast.LENGTH_SHORT).show();
-                                }else {
+                                   }else {
                                     Toast.makeText(ProductDetailActivity.this, "Quantity must be greater than 0", Toast.LENGTH_SHORT).show();
                                 }
                             }
@@ -136,7 +131,7 @@ public class ProductDetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(retrofit2.Call<Product> call, Throwable t) {
+            public void onFailure(Call<Product> call, Throwable t) {
 
             }
         });
@@ -152,12 +147,16 @@ public class ProductDetailActivity extends AppCompatActivity {
         cart.setUser(user); // currentUser là đối tượng User đang đăng nhập
         cart.setProduct(product);
         cart.setQuantity(count);
+        cart.setSelected(false);
 
-        ApiService.apiService.addCart(cart).enqueue(new Callback<List<Cart>>() {
+        ApiService.apiService.addProductToCart(cart).enqueue(new Callback<List<Cart>>() {
             @Override
             public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
                 Log.e("=====", "add cart successfully");
                 finish();
+//                notify();
+                Toast.makeText(ProductDetailActivity.this, "Add to cart successfully", Toast.LENGTH_SHORT).show();
+
             }
 
             @Override
