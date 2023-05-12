@@ -55,25 +55,10 @@ public class PreManager {
 
         return user;
     }
-<<<<<<< HEAD
     public void logout(){
         SharedPreferences sharedPreferences = context.getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.commit();
-=======
-
-    public static void logoutUser() {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-
-        // Perform any additional actions required upon logout
-        // For example, navigate to the login screen
-        Intent intent = new Intent(context, LoginActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
->>>>>>> 84e7f6740b470eac79e427a65d82538ea124b0af
     }
 }

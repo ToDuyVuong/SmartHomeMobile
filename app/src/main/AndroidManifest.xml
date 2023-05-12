@@ -40,17 +40,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-
-        <activity
-                android:name=".activity.ProfileActivity"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-=======
         <activity
             android:name=".activity.EditProfileActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
->>>>>>> 84e7f6740b470eac79e427a65d82538ea124b0af
 
         <activity
             android:name=".activity.IndexActivity"

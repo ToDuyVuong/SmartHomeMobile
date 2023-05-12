@@ -21,11 +21,7 @@ import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public interface ApiService {
 
-<<<<<<< HEAD
     public static final String BASE_URL = "http://192.168.1.5:8085";
-=======
-    public static final String BASE_URL = "http://192.168.1.6:8085";
->>>>>>> 84e7f6740b470eac79e427a65d82538ea124b0af
 
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
 
@@ -45,11 +41,6 @@ public interface ApiService {
     @POST("/user/update")
     Call<User> update(@Body User user);
 
-<<<<<<< HEAD
-    //    @GET("/forgot/password")
-//    Call<String> forgotPassword(@Query("id") String id);
-=======
->>>>>>> 84e7f6740b470eac79e427a65d82538ea124b0af
     @GET("/forgot/password")
     Call<List<String>> forgotPassword(@Query("id") String id);
 
@@ -97,9 +88,6 @@ public interface ApiService {
 
     @DELETE("cart/remove/{cartId}")
     Call<Void> removeProductToCart(@Path("cartId") Integer cartId);
-
-
-
 
     // Order
     @POST("order/newOrder")
