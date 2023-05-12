@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,8 +60,9 @@ public class IndexActivity extends AppCompatActivity {
     ImageView imageViewOder;
     List<Product> arrayListProduct = new ArrayList<>();
     boolean isLoading = false;
-    LinearLayout buttonHome, buttonCategory, buttonProfile, buttonSetting, buttonLogout;
-
+    LinearLayout buttonHome, buttonCategory, buttonProfile, buttonLogout;
+    Button buttonSearch;
+    EditText editTextSearch;
 
 
     @Override
@@ -75,6 +78,20 @@ public class IndexActivity extends AppCompatActivity {
 
         recyclerViewProductAllIndex();
 
+        binding();
+    }
+
+    private void binding() {
+
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String search = editTextSearch.getText().toString();
+                Intent intent = new Intent(IndexActivity.this, SearchProductActivity.class);
+                intent.putExtra("search", search);
+                startActivity(intent);
+            }
+        });
         buttonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,7 +112,7 @@ public class IndexActivity extends AppCompatActivity {
         imageViewOder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IndexActivity.this, ListOrderActivity.class);
+                Intent intent = new Intent(IndexActivity.this, IndexActivity.class);
                 startActivity(intent);
             }
         });
@@ -120,7 +137,6 @@ public class IndexActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void anhXa() {
@@ -134,6 +150,9 @@ public class IndexActivity extends AppCompatActivity {
         userName.setText("Hi " + preManager.getUser().getUsername());
         String urlImage = preManager.getUser().getAvatar();
         Glide.with(getApplicationContext()).load(urlImage).into(avatar);
+
+        buttonSearch = findViewById(R.id.buttonSearch);
+        editTextSearch = findViewById(R.id.editTextSearch);
     }
 
     private void initScrollListener() {
@@ -174,9 +193,9 @@ public class IndexActivity extends AppCompatActivity {
                     arrayListProduct.add(productList.get(currentSize - 1));
                     currentSize++;
                 }
-                if(arrayListProduct.size()%2!=0){
+                if (arrayListProduct.size() % 2 != 0) {
 
-                    arrayListProduct.add(productList.get(productList.size()-1));
+                    arrayListProduct.add(productList.get(productList.size() - 1));
                 }
                 adapterProductAllIndex.notifyDataSetChanged();
                 isLoading = false;
@@ -204,7 +223,6 @@ public class IndexActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     Log.e("ffff", e.toString());
                 }
-
 
 
             }

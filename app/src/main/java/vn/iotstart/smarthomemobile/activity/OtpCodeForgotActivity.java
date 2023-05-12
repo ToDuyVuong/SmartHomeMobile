@@ -1,4 +1,4 @@
-package vn.iotstart.smarthomemobile.activity.forgotpassword;
+package vn.iotstart.smarthomemobile.activity;
 
 import android.content.Intent;
 import android.os.Bundle;

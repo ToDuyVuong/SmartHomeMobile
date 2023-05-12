@@ -82,8 +82,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             imageViewProduct = itemView.findViewById(R.id.imageViewProductImageToCart);
             textViewProductName = itemView.findViewById(R.id.textViewProductNameToCart);
             buttonRemove = itemView.findViewById(R.id.buttonRemoveProductToCart);
-            buttonPlus = itemView.findViewById(R.id.buttonPlus);
-            buttonMinus = itemView.findViewById(R.id.buttonMinus);
             textViewQuantity = itemView.findViewById(R.id.textViewProductQuantityToCart);
             buttonMinus = itemView.findViewById(R.id.buttonMinusProductQuantityToCart);
             buttonPlus = itemView.findViewById(R.id.buttonPlusProductQuantityToCart);

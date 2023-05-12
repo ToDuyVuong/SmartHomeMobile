@@ -67,8 +67,8 @@ public interface ApiService {
     @GET("product/productDetail")
     Call<Product> getProductDetail(@Query("productId") String productId);
 
-    @GET("product/search")
-    Call<List<Product>> searchProduct(@Query("keyword") String keyword);
+    @GET("product/searchProduct")
+    Call<List<Product>> searchProduct(@Query("search") String search);
 
     @GET("product/getLatestProduct")
     Call<List<Product>> getLatestProduct();

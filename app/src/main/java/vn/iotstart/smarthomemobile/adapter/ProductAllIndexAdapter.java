@@ -5,21 +5,30 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 
 import com.bumptech.glide.Glide;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import vn.iotstart.smarthomemobile.PreManager;
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.activity.ProductDetailActivity;
+import vn.iotstart.smarthomemobile.api.ApiService;
+import vn.iotstart.smarthomemobile.model.Cart;
 import vn.iotstart.smarthomemobile.model.Product;
+import vn.iotstart.smarthomemobile.model.User;
 
 public class ProductAllIndexAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
     private final int VIEW_TYPE_ITEM = 0;
@@ -74,6 +83,44 @@ public class ProductAllIndexAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         Glide.with(context)
                 .load(product.getImages().get(0).getImage())
                 .into(holder.image);
+
+        holder.addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                User user = new User();
+                user.setId(holder.preManager.getId());
+                Cart cart = new Cart();
+                cart.setUser(user); // currentUser là đối tượng User đang đăng nhập
+                cart.setProduct(listProduct.get(position));
+                cart.setQuantity(1);
+                cart.setSelected(false);
+
+                ApiService.apiService.addProductToCart(cart).enqueue(new Callback<List<Cart>>() {
+                    @Override
+                    public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
+                        Toast.makeText(context, "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Cart>> call, Throwable t) {
+
+                    }
+                });
+
+
+            }});
+
+
+        holder.image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Bạn đã chọn product" + holder.title.getText().toString(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ProductDetailActivity.class);
+                intent.putExtra("productId", listProduct.get(position).getProductId().toString());
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -93,6 +140,9 @@ public class ProductAllIndexAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             image = itemView.findViewById(R.id.picProductAll);
             addBtn = itemView.findViewById(R.id.buttonAddProductAll);
             preManager = new PreManager(context);
+
+
+
         }
     }
     private class Loading extends RecyclerView.ViewHolder {

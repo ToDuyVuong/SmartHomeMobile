@@ -147,7 +147,8 @@ public class NewOrderActivity extends AppCompatActivity {
 
 //                    finish();
                     Toast.makeText(getApplicationContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(NewOrderActivity.this, IndexActivity.class);
+//                    finish();
+                    Intent intent = new Intent(NewOrderActivity.this, OrderDetailActivity.class);
                     startActivity(intent);
                 }
             }

@@ -16,17 +16,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
-        <activity android:name=".activity.forgotpassword.NewPassword" />
+        <activity android:name=".activity.NewPassword" />
         <activity android:name=".activity.CategoryToProductActivity" />
-        <activity android:name=".activity.forgotpassword.OtpCodeForgotActivity" />
-        <activity android:name=".activity.forgotpassword.AccountForgotActivity" />
+        <activity android:name=".activity.OtpCodeForgotActivity" />
+        <activity android:name=".activity.AccountForgotActivity" />
         <activity android:name=".activity.ProductDetailActivity" />
         <activity android:name=".activity.RegisterActivity" />
-        <activity android:name=".activity.CartActivity"/>
-        <activity android:name=".activity.NewOrderActivity"/>
-        <activity android:name=".activity.ListOrderActivity"/>
-        <activity android:name=".activity.OrderDetailActivity"/>
-        <activity android:name=".activity.ProfileActivity"/>
+        <activity android:name=".activity.CartActivity" />
+        <activity android:name=".activity.NewOrderActivity" />
+        <activity android:name=".activity.ListOrderActivity" />
+        <activity android:name=".activity.OrderDetailActivity" />
+        <activity android:name=".activity.ProfileActivity" />
+        <activity android:name=".activity.SearchProductActivity" />
 
 
         <activity
@@ -39,9 +40,8 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".activity.EditProfileActivity"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:name=".activity.EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name=".activity.IndexActivity"
