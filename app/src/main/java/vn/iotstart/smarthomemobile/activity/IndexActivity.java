@@ -78,7 +78,7 @@ public class IndexActivity extends AppCompatActivity {
         buttonProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IndexActivity.this, EditProfileActivity.class);
+                Intent intent = new Intent(IndexActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });

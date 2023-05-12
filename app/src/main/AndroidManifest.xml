@@ -26,6 +26,7 @@
         <activity android:name=".activity.NewOrderActivity"/>
         <activity android:name=".activity.ListOrderActivity"/>
         <activity android:name=".activity.OrderDetailActivity"/>
+        <activity android:name=".activity.ProfileActivity"/>
 
 
         <activity

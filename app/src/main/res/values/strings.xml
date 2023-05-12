@@ -30,4 +30,6 @@
     <string name="comfirm_new_password">Comfirm New Password</string>
     <string name="btn_new_password">New Password</string>
     <string name="btn_otp_code">Otp Code</string>
+    <string name="email">Email\n</string>
+    <string name="phone">Phone\n</string>
 </resources>
