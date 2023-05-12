@@ -27,28 +27,23 @@
         <activity
             android:name=".activity.LoginActivity"
             android:exported="true"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme.ProfileTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
+
         <activity
                 android:name=".activity.ProfileActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-=======
->>>>>>> 682b90e306700e294526812655cbdf74208b6615
 
         <activity
             android:name=".activity.IndexActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

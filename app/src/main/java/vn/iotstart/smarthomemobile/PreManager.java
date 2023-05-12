@@ -21,7 +21,7 @@ public class PreManager {
         editor.putString("email", user.getEmail());
         editor.putString("phoneNumber", user.getPhoneNumber());
         editor.putString("address", user.getAddress());
-        editor.commit();
+        editor.apply();
     }
 
     public String getId(){
@@ -51,5 +51,11 @@ public class PreManager {
         }
 
         return user;
+    }
+    public void logout(){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("LoginUser", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.commit();
     }
 }

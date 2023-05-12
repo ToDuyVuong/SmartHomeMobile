@@ -100,36 +100,36 @@ public class LoginActivity extends AppCompatActivity {
         progressBarLogin.setVisibility(View.GONE);
     }
 
-        private void loginUser(User user){
-            ApiService.apiService.login(user).enqueue(new Callback<LoginResponse>() {
-                @Override
-                public void onResponse(@NonNull Call<LoginResponse> call,@NonNull Response<LoginResponse> response) {
-                    progressBarLogin.setVisibility(View.GONE);
-                    if (response.isSuccessful()){
-                        LoginResponse loginResponse = response.body();
-                        if (TextUtils.equals(loginResponse.getMessage(),"Not Found")){
-                            Toast.makeText(LoginActivity.this, "Your account doesn't exist", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        if (TextUtils.equals(loginResponse.getMessage(), "Incorrect")){
-                            Toast.makeText(LoginActivity.this, "Incorrect Password, Please try again", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        else if (TextUtils.equals(loginResponse.getMessage(), "Success")){
-                            Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                            preManager.saveUserDetail(loginResponse.getUser());
-                            startActivity(new Intent(LoginActivity.this, IndexActivity.class));
-                        }
+    private void loginUser(User user){
+        ApiService.apiService.login(user).enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<LoginResponse> call,@NonNull Response<LoginResponse> response) {
+                progressBarLogin.setVisibility(View.GONE);
+                if (response.isSuccessful()){
+                    LoginResponse loginResponse = response.body();
+                    if (TextUtils.equals(loginResponse.getMessage(),"Not Found")){
+                        Toast.makeText(LoginActivity.this, "Your account doesn't exist", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (TextUtils.equals(loginResponse.getMessage(), "Incorrect")){
+                        Toast.makeText(LoginActivity.this, "Incorrect Password, Please try again", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    else if (TextUtils.equals(loginResponse.getMessage(), "Success")){
+                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                        preManager.saveUserDetail(loginResponse.getUser());
+                        startActivity(new Intent(LoginActivity.this, IndexActivity.class));
                     }
                 }
+            }
 
-                @Override
-                public void onFailure(@NonNull Call<LoginResponse> call,@NonNull Throwable t) {
-                    progressBarLogin.setVisibility(View.GONE);
+            @Override
+            public void onFailure(@NonNull Call<LoginResponse> call,@NonNull Throwable t) {
+                progressBarLogin.setVisibility(View.GONE);
+                Log.d("login", "onFailure: " + t.getMessage());
+                Toast.makeText(LoginActivity.this,"An error occur! Please try again", Toast.LENGTH_SHORT).show();
 
-                    Toast.makeText(LoginActivity.this,"An error occur! Please try again", Toast.LENGTH_SHORT).show();
-
-                }
-            });
-        }
+            }
+        });
+    }
 }

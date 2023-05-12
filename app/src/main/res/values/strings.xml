@@ -30,4 +30,8 @@
     <string name="comfirm_new_password">Comfirm New Password</string>
     <string name="btn_new_password">New Password</string>
     <string name="btn_otp_code">Otp Code</string>
+
+<!--    profile-->
+    <string name="title_activity_profile">Profile</string>
+    <string name="action_settings">Settings</string>
 </resources>
