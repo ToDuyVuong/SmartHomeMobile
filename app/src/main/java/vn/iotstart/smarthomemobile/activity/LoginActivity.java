@@ -83,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 
     private void mapping(){
@@ -95,7 +96,9 @@ public class LoginActivity extends AppCompatActivity {
         preManager = new PreManager(getApplicationContext());
 
         if (!preManager.isUserLogout()){
-            startActivity(new Intent(LoginActivity.this, IndexActivity.class));
+            Intent intent = new Intent(getApplicationContext(), IndexActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
             return;
         }
 
@@ -120,7 +123,9 @@ public class LoginActivity extends AppCompatActivity {
                     else if (TextUtils.equals(loginResponse.getMessage(), "Success")){
                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                         preManager.saveUserDetail(loginResponse.getUser());
-                        startActivity(new Intent(LoginActivity.this, IndexActivity.class));
+                        Intent intent = new Intent(getApplicationContext(), IndexActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
                     }
                 }
             }

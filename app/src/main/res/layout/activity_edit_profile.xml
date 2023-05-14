@@ -38,23 +38,24 @@
                     android:background="@drawable/profile_bk">
 
                 <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/profile_round" android:id="@+id/imageProfileAvatar"/>
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:src="@drawable/profile_round" android:id="@+id/imageProfileAvatar"
+                        android:layout_marginTop="10dp"/>
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="\@appsnippuser"
                         android:textSize="28dp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" android:id="@+id/textViewUserId"/>
 
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="[email protected]"
                         android:textSize="12dp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" android:id="@+id/textViewEmailProfileTitle"/>
 
                 <RelativeLayout
                         android:layout_width="match_parent"

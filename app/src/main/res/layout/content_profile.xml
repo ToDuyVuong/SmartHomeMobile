@@ -170,7 +170,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
             <TextView
-                    android:text="Save"
+                    android:text="Edit"
                     style="@style/profileStyledBackButton"
                     android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
                     android:gravity="center|center_horizontal"
@@ -185,6 +185,21 @@
         </LinearLayout>
         <View style="@style/proifleDetailsView" android:layout_width="match_parent" android:layout_height="wrap_content"
               android:id="@+id/view"/>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="List Order"
+                    style="@style/profileStyledBackButton"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:gravity="center|center_horizontal"
+                    android:drawableLeft="@android:drawable/ic_menu_agenda"
+                    android:layout_margin="2dp" android:id="@+id/btnListOrder"/>
+        </LinearLayout>
+        <View style="@style/proifleDetailsView" android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/view2" android:layout_weight="1"/>
 
     </LinearLayout>
 

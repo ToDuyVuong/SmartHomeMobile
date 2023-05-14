@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.*;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
+import com.bumptech.glide.Glide;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -46,11 +48,12 @@ public class EditProfileActivity extends AppCompatActivity {
     TextView addressTitle;
     TextView addressContent;
     EditText addressText;
-    int currentTextId = -1;
-    int currentTitleId = -1;
-    int currentContentId = -1;
-    private CoordinatorLayout rootLayout;
-    private NestedScrollView rootLayout2;
+    boolean isEditting = false;
+    CoordinatorLayout rootLayout;
+    NestedScrollView rootLayout2;
+    TextView userIdTitle;
+    TextView emailProfileTile;
+    TextView btnListOrder;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -67,21 +70,20 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 // Hide the keyboard when the user touches outside of the EditText
-                endEditing();
+                hideKeyboard();
                 return false;
             }
         });
         rootLayout2.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                endEditing();
+                hideKeyboard();
                 return false;
             }
         });
         radioGroupGender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                endEditing();
             }
         });
         btnBack.setOnClickListener(new View.OnClickListener() {
@@ -101,61 +103,39 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        nameRelative.setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startEditing(nameTitle, nameContent, nameText);
+                if (!isEditting){
+                    startEditing();
+                }
+                else{
+                    isEditting = false;
+                    btnSave.setText("Edit");
+                    //
+                    updateUserInfo();
+                    endEditing();
+                }
             }
         });
-        phoneRelative.setOnClickListener(new View.OnClickListener() {
+
+        btnListOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startEditing(phoneTitle, phoneContent, phoneText);
+                startActivity(new Intent(getApplicationContext(), ListOrderActivity.class));
             }
         });
-        emailRelative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startEditing(emailTitle, emailContent, emailText);
-            }
-        });
-        addressRelative.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startEditing(addressTitle, addressContent, addressText);
-            }
-        });
-//        buttonBackHome.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(ProfileActivity.this, IndexActivity.class));
-//            }
-//        });
-//        buttonChangePassword.setOnClickListener((new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(ProfileActivity.this, "Unavailable Currently", Toast.LENGTH_SHORT).show();
-//            }
-//        }));
-//        buttonSave.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                updateUserInfo();
-//            }
-//        });
     }
 
 
     private void mapping(){
-        rootLayout = findViewById(R.id.rootLayout);
-        rootLayout2 = findViewById(R.id.rootLayout2);
         preManager = new PreManager(getApplicationContext());
         avatar = findViewById(R.id.imageProfileAvatar);
         btnBack = findViewById(R.id.btnBackToHome);
         btnSave = findViewById(R.id.btnSave);
         btnLogout = findViewById(R.id.btnLoggout);
         radioMale = findViewById(R.id.radioButtonProfileMale);
-        radioFemale = findViewById(R.id.radioButtonProfileMale);
+        radioFemale = findViewById(R.id.radioButtonProfileFemale);
         radioGroupGender = findViewById(R.id.radioProfileGender);
 
         nameRelative = findViewById(R.id.relativetUserName);
@@ -177,80 +157,97 @@ public class EditProfileActivity extends AppCompatActivity {
         addressTitle = findViewById(R.id.addressTextView);
         addressContent = findViewById(R.id.addressTextViewContent);
         addressText = findViewById(R.id.textAddressProfile);
-    }
-    private void startEditing(TextView title, TextView content, EditText text){
-        if (currentTextId != -1){
-            endEditing();
-        }
 
-        text.setVisibility(View.VISIBLE);
-        content.setVisibility(View.GONE);
-        title.setVisibility(View.GONE);
-        text.requestFocus();
-        text.selectAll();
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.showSoftInput(text, InputMethodManager.SHOW_IMPLICIT);
-        }
-        currentTextId = text.getId();
-        currentTitleId = title.getId();
-        currentContentId = content.getId();
-        text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE || actionId == EditorInfo.IME_ACTION_NEXT){
-                    endEditing();
-                    return true;
-                }
-                return false;
-            }
-        });
+        rootLayout = findViewById(R.id.rootLayout);
+        rootLayout2 = findViewById(R.id.rootLayout2);
+
+        radioMale.setEnabled(false);
+        radioFemale.setEnabled(false);
+
+        userIdTitle = findViewById(R.id.textViewUserId);
+        emailProfileTile = findViewById(R.id.textViewEmailProfileTitle);
+        btnListOrder = findViewById(R.id.btnListOrder);
+    }
+    private void startEditing(){
+        isEditting = true;
+        btnSave.setText("Save");
+
+        radioMale.setEnabled(true);
+        radioFemale.setEnabled(true);
+
+        nameText.setText(nameContent.getText());
+        phoneText.setText(phoneContent.getText());
+        emailText.setText(emailContent.getText());
+        addressText.setText(addressContent.getText());
+
+        nameContent.setVisibility(View.GONE);
+        nameTitle.setVisibility(View.GONE);
+        nameText.setVisibility(View.VISIBLE);
+        phoneContent.setVisibility(View.GONE);
+        phoneTitle.setVisibility(View.GONE);
+        phoneText.setVisibility(View.VISIBLE);
+        emailContent.setVisibility(View.GONE);
+        emailTitle.setVisibility(View.GONE);
+        emailText.setVisibility(View.VISIBLE);
+        addressContent.setVisibility(View.GONE);
+        addressTitle.setVisibility(View.GONE);
+        addressText.setVisibility(View.VISIBLE);
     }
     private void endEditing(){
-        if (currentTextId == -1) return;
-        EditText text = findViewById(currentTextId);
-        TextView title = findViewById(currentTitleId);
-        TextView content = findViewById(currentContentId);
+        isEditting = false;
+        btnSave.setText("Edit");
 
-        //hide keyboard
+        radioMale.setEnabled(false);
+        radioFemale.setEnabled(false);
+
+        nameContent.setText(nameText.getText());
+        emailContent.setText(emailText.getText());
+        phoneContent.setText(phoneContent.getText());
+        addressContent.setText(addressText.getText());
+
+        nameContent.setVisibility(View.VISIBLE);
+        nameTitle.setVisibility(View.VISIBLE);
+        nameText.setVisibility(View.GONE);
+        phoneContent.setVisibility(View.VISIBLE);
+        phoneTitle.setVisibility(View.VISIBLE);
+        phoneText.setVisibility(View.GONE);
+        emailContent.setVisibility(View.VISIBLE);
+        emailTitle.setVisibility(View.VISIBLE);
+        emailText.setVisibility(View.GONE);
+        addressContent.setVisibility(View.VISIBLE);
+        addressTitle.setVisibility(View.VISIBLE);
+        addressText.setVisibility(View.GONE);
+    }
+    private void hideKeyboard(){
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
-        //hide edittext
-        text.setVisibility(View.GONE);
-        title.setVisibility(View.VISIBLE);
-        content.setVisibility(View.VISIBLE);
-
-        if(TextUtils.isEmpty(text.getText())){
-            text.setText(content.getText());
-            return;
-        }
-        content.setText(text.getText());
-        currentTextId = -1;
+        imm.hideSoftInputFromWindow(nameText.getWindowToken(), 0);
     }
 
-//    private User getUserInfo(){
-//        User prefUser = preManager.getUser();
-//        String textGender;
-//        if (radioMale.isChecked()){
-//            textGender = "Nam";
-//        }
-//        else{
-//            textGender = "Nữ";
-//        }
-//
-//        User user = new User();
-//        user.setId(textAccount.getText().toString());
-//        user.setPassword(prefUser.getPassword());
-//        user.setUsername(textUsername.getText().toString());
-//        user.setEmail(textEmail.getText().toString());
-//        user.setPhoneNumber(textPhoneNumber.getText().toString());
-//        user.setAddress(textAddress.getText().toString());
-//        user.setGender(textGender);
-//        //Change later
-//        user.setAvatar(prefUser.getAvatar());
-//
-//        return user;
-//    }
+    private User getUserInfo(){
+        User prefUser = preManager.getUser();
+        String textGender;
+        if (radioMale.isChecked()){
+            textGender = "Nam";
+        }
+        else{
+            textGender = "Nữ";
+        }
+
+        User user = new User();
+        user.setId(prefUser.getId());
+        user.setPassword(prefUser.getPassword());
+        user.setUsername(nameText.getText().toString());
+        user.setEmail(emailText.getText().toString());
+        user.setPhoneNumber(phoneText.getText().toString());
+        user.setAddress(addressText.getText().toString());
+        user.setGender(textGender);
+        //Change later
+        user.setAvatar(prefUser.getAvatar());
+
+        Log.d("hello", "getUserInfo: " + user.toString());
+
+        return user;
+    }
 
     private void bindingData(){
         User user = preManager.getUser();
@@ -268,25 +265,34 @@ public class EditProfileActivity extends AppCompatActivity {
         else{
             radioGroupGender.check(R.id.radioButtonProfileFemale);
         }
+        userIdTitle.setText("@" + user.getId());
+        emailProfileTile.setText(user.getEmail());
+
+        Glide.with(getApplicationContext())
+                .load(user.getAvatar())
+                .fitCenter()
+                .into(avatar);
     }
 
-//    private void updateUserInfo(){
-//        User user = getUserInfo();
-//        ApiService.apiService.update(user).enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(Call<User> call, Response<User> response) {
-//                if (response.isSuccessful()){
-//                    User user = response.body();
-//                    preManager.saveUserDetail(user);
-//                    Toast.makeText(ProfileActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<User> call, Throwable t) {
-//                Toast.makeText(ProfileActivity.this, "Failed to Save", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
+    private void updateUserInfo(){
+        User user = getUserInfo();
+        ApiService.apiService.update(user).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful()){
+                    User user = response.body();
+                    preManager.saveUserDetail(user);
+                    bindingData();
+                    Toast.makeText(getApplicationContext(), "Saved", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "Failed to Save", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 
 }

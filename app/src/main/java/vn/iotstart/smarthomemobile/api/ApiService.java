@@ -21,7 +21,7 @@ import vn.iotstart.smarthomemobile.response.LoginResponse;
 
 public interface ApiService {
 
-    public static final String BASE_URL = "http://192.168.1.5:8085";
+    public static final String BASE_URL = "http://192.168.108.107:8085";
 
     Gson gson = new GsonBuilder().setDateFormat("yyyy MM dd HH:mm:ss").create();
 
