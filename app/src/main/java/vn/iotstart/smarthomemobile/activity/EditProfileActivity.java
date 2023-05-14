@@ -1,18 +1,27 @@
 package vn.iotstart.smarthomemobile.activity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.*;
-import android.view.inputmethod.EditorInfo;
 import android.widget.*;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.widget.NestedScrollView;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,37 +32,26 @@ import vn.iotstart.smarthomemobile.model.User;
 import androidx.appcompat.widget.Toolbar;
 import android.view.inputmethod.InputMethodManager;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class EditProfileActivity extends AppCompatActivity {
     PreManager preManager;
-    RadioButton radioMale;
-    RadioButton radioFemale;
+    RadioButton radioMale, radioFemale;
     RadioGroup radioGroupGender;
     ImageView avatar;
-    TextView btnBack;
-    TextView btnLogout;
-    TextView btnSave;
-    RelativeLayout nameRelative;
-    TextView nameTitle;
-    TextView nameContent;
-    EditText nameText;
-    RelativeLayout phoneRelative;
-    TextView phoneTitle;
-    TextView phoneContent;
-    EditText phoneText;
-    RelativeLayout emailRelative;
-    TextView emailTitle;
-    TextView emailContent;
-    EditText emailText;
-    RelativeLayout addressRelative;
-    TextView addressTitle;
-    TextView addressContent;
-    EditText addressText;
+    TextView btnSave, btnEdit, btnUpload, btnLogout, btnBack;
+    RelativeLayout nameRelative, phoneRelative, emailRelative, addressRelative;
+    TextView nameTitle, nameContent, phoneTitle, phoneContent, emailTitle, emailContent, addressTitle, addressContent;
+    EditText nameText, phoneText, emailText, addressText;
     boolean isEditting = false;
     CoordinatorLayout rootLayout;
     NestedScrollView rootLayout2;
-    TextView userIdTitle;
-    TextView emailProfileTile;
-    TextView btnListOrder;
+    TextView userIdTitle, btnListOrder, emailProfileTile;
+    ProgressDialog progressDialog;
+    Uri imageUri;
+    StorageReference storageReference;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -103,19 +101,27 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
 
-        btnSave.setOnClickListener(new View.OnClickListener() {
+        btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isEditting){
                     startEditing();
                 }
-                else{
-                    isEditting = false;
-                    btnSave.setText("Edit");
-                    //
+            }
+        });
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isEditting){
                     updateUserInfo();
                     endEditing();
                 }
+            }
+        });
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                uploadImage();
             }
         });
 
@@ -132,7 +138,9 @@ public class EditProfileActivity extends AppCompatActivity {
         preManager = new PreManager(getApplicationContext());
         avatar = findViewById(R.id.imageProfileAvatar);
         btnBack = findViewById(R.id.btnBackToHome);
+        btnEdit = findViewById(R.id.btnEdit);
         btnSave = findViewById(R.id.btnSave);
+        btnUpload = findViewById(R.id.btnUpload);
         btnLogout = findViewById(R.id.btnLoggout);
         radioMale = findViewById(R.id.radioButtonProfileMale);
         radioFemale = findViewById(R.id.radioButtonProfileFemale);
@@ -167,6 +175,9 @@ public class EditProfileActivity extends AppCompatActivity {
         userIdTitle = findViewById(R.id.textViewUserId);
         emailProfileTile = findViewById(R.id.textViewEmailProfileTitle);
         btnListOrder = findViewById(R.id.btnListOrder);
+
+        btnSave.setVisibility(View.GONE);
+        btnUpload.setVisibility(View.GONE);
     }
     private void startEditing(){
         isEditting = true;
@@ -174,6 +185,10 @@ public class EditProfileActivity extends AppCompatActivity {
 
         radioMale.setEnabled(true);
         radioFemale.setEnabled(true);
+
+        btnSave.setVisibility(View.VISIBLE);
+        btnUpload.setVisibility(View.VISIBLE);
+        btnEdit.setVisibility(View.GONE);
 
         nameText.setText(nameContent.getText());
         phoneText.setText(phoneContent.getText());
@@ -199,6 +214,11 @@ public class EditProfileActivity extends AppCompatActivity {
 
         radioMale.setEnabled(false);
         radioFemale.setEnabled(false);
+
+
+        btnSave.setVisibility(View.GONE);
+        btnUpload.setVisibility(View.GONE);
+        btnEdit.setVisibility(View.VISIBLE);
 
         nameContent.setText(nameText.getText());
         emailContent.setText(emailText.getText());
@@ -273,12 +293,55 @@ public class EditProfileActivity extends AppCompatActivity {
                 .fitCenter()
                 .into(avatar);
     }
-
+    private void uploadImage(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, 100);
+    }
     private void updateUserInfo(){
+        progressDialog = new ProgressDialog(EditProfileActivity.this);
+        progressDialog.setTitle("Updating...");
+        progressDialog.show();
+
         User user = getUserInfo();
+        final String[] uploadedImageUrl = {""};
+        if (imageUri != null)
+        {
+            Log.d("hello", "updateUserInfo: ");
+            saveImageToFirebase(new ImageUploadCallback() {
+                @Override
+                public void onSuccess(String downloadUrl) {
+                    // Handle the successful upload and obtain the download URL
+                    // The downloadUrl variable contains the URL of the uploaded image
+                    if (TextUtils.isEmpty(downloadUrl)) {
+                        if (progressDialog.isShowing())
+                            progressDialog.dismiss();
+                        Toast.makeText(EditProfileActivity.this, "Failed to Save", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    user.setAvatar(downloadUrl);
+                    saveUser(user);
+                }
+
+                @Override
+                public void onFailure(Exception e) {
+                    // Handle the upload failure
+                    Log.d("saveImage", "onFailure: " + e.getMessage());
+                    saveUser(user);
+                }
+            });
+        }
+
+
+    }
+    private void saveUser(User user){
         ApiService.apiService.update(user).enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                if (progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
                 if (response.isSuccessful()){
                     User user = response.body();
                     preManager.saveUserDetail(user);
@@ -288,11 +351,57 @@ public class EditProfileActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                if (progressDialog.isShowing()){
+                    progressDialog.dismiss();
+                }
+                Log.d("updateUserInfo", "onFailure: " + t.getMessage());
                 Toast.makeText(getApplicationContext(), "Failed to Save", Toast.LENGTH_SHORT).show();
             }
-        });
+        });    }
+
+
+    private void saveImageToFirebase(final ImageUploadCallback callback) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.CANADA);
+        Date now = new Date();
+        String filename = format.format(now);
+        FirebaseApp.initializeApp(EditProfileActivity.this);
+        storageReference = FirebaseStorage.getInstance().getReference("images/" + filename);
+        storageReference.putFile(imageUri)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        storageReference.getDownloadUrl()
+                                .addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                    @Override
+                                    public void onSuccess(Uri uri) {
+                                       String newUri = uri.toString();
+                                        callback.onSuccess(newUri);
+                                     }
+                                });
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        callback.onFailure(e);
+                    }
+                });
+    }
+    interface ImageUploadCallback{
+        void onSuccess(String newUri);
+        void onFailure(Exception e);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (requestCode == 100 && data != null && data.getData() != null){
+            imageUri = data.getData();
+            Glide.with(EditProfileActivity.this)
+                    .load(imageUri)
+                    .into(avatar);
+        }
+    }
 
 }

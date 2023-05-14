@@ -175,13 +175,21 @@
                     android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
                     android:gravity="center|center_horizontal"
                     android:drawableLeft="@android:drawable/ic_popup_sync"
+                    android:layout_margin="2dp" android:id="@+id/btnEdit"/>
+            <TextView
+                    android:text="Save"
+                    style="@style/profileStyledBackButton"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:gravity="center|center_horizontal"
+                    android:drawableLeft="@android:drawable/ic_popup_sync"
                     android:layout_margin="2dp" android:id="@+id/btnSave"/>
             <TextView
-                    android:text="Logout"
-                    style="@style/profileStyledBackButton" android:id="@+id/btnLoggout"
+                    android:text="Upload"
+                    style="@style/profileStyledBackButton"
                     android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
-                    android:gravity="center" android:drawableLeft="@android:drawable/ic_menu_set_as"
-                    android:layout_margin="2dp"/>
+                    android:gravity="center|center_horizontal"
+                    android:drawableLeft="@android:drawable/ic_popup_sync"
+                    android:layout_margin="2dp" android:id="@+id/btnUpload"/>
         </LinearLayout>
         <View style="@style/proifleDetailsView" android:layout_width="match_parent" android:layout_height="wrap_content"
               android:id="@+id/view"/>
@@ -196,6 +204,12 @@
                     android:gravity="center|center_horizontal"
                     android:drawableLeft="@android:drawable/ic_menu_agenda"
                     android:layout_margin="2dp" android:id="@+id/btnListOrder"/>
+            <TextView
+                    android:text="Logout"
+                    style="@style/profileStyledBackButton" android:id="@+id/btnLoggout"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:gravity="center" android:drawableLeft="@android:drawable/ic_menu_set_as"
+                    android:layout_margin="2dp"/>
         </LinearLayout>
         <View style="@style/proifleDetailsView" android:layout_width="match_parent"
               android:layout_height="wrap_content"
