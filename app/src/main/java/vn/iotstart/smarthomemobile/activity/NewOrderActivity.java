@@ -25,7 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstart.smarthomemobile.PreManager;
 import vn.iotstart.smarthomemobile.R;
-import vn.iotstart.smarthomemobile.adapter.CartAdapter;
 import vn.iotstart.smarthomemobile.adapter.NewOrderAdapter;
 import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.model.Cart;

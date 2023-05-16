@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools"
-                                             android:layout_width="match_parent"
-                                             android:layout_height="match_parent"
-                                             tools:context=".activity.LoginActivity"
-                                             android:background="@drawable/login_bk"
-                                             android:focusableInTouchMode="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bk"
+    android:focusableInTouchMode="true"
+    tools:context=".activity.LoginActivity">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_marginBottom="8dp"
-                  android:layout_marginEnd="24dp"
-                  android:layout_marginStart="24dp"
-                  android:layout_marginTop="8dp"
-                  android:orientation="vertical"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toTopOf="parent"
-                  android:id="@+id/linearLayout">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                style="@style/loginHeader"
-                android:text="Login"
-                android:layout_marginTop="@dimen/loginViewsMargin"/>
+            style="@style/loginHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="Login" />
 
 
         <EditText
-                android:id="@+id/editTextLoginAccount"
-                style="@style/modifiedEditText"
-                android:hint="@string/account"
-                android:inputType="textEmailAddress"
-                android:maxLines="1"/>
+            android:id="@+id/editTextLoginAccount"
+            style="@style/modifiedEditText"
+            android:hint="@string/account"
+            android:inputType="textEmailAddress"
+            android:maxLines="1" />
 
 
         <EditText
-                android:id="@+id/editTextLoginPassword"
-                style="@style/modifiedEditText"
-                android:hint="@string/login_password_hint"
-                android:inputType="textPassword"
-                android:maxLines="1"/>
+            android:id="@+id/editTextLoginPassword"
+            style="@style/modifiedEditText"
+            android:hint="@string/login_password_hint"
+            android:inputType="textPassword"
+            android:maxLines="1" />
 
         <Button
             android:id="@+id/buttonLogin"
@@ -53,29 +55,36 @@
             android:text="Login" />
 
         <TextView
-                style="@style/parent"
-                android:textAlignment="textEnd"
-                android:textStyle="bold"
-                android:textColor="@color/primaryTextColor"
-                android:text="@string/login_signup_hint"
-                android:layout_marginTop="@dimen/loginViewsMargin" android:id="@+id/textViewSignup"/>
+            android:id="@+id/textViewSignup"
+            style="@style/parent"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/login_signup_hint"
+            android:textAlignment="textEnd"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold" />
+
         <TextView
-                style="@style/parent"
-                android:textAlignment="textEnd"
-                android:textStyle="bold"
-                android:textColor="@color/primaryTextColor"
-                android:text="@string/forgot_password"
-                android:layout_marginTop="@dimen/loginViewsMargin" android:id="@+id/textViewForgotPassword"
-                android:layout_width="match_parent" android:layout_height="wrap_content"/>
+            android:id="@+id/textViewForgotPassword"
+            style="@style/parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/loginViewsMargin"
+            android:text="@string/forgot_password"
+            android:textAlignment="textEnd"
+            android:textColor="@color/primaryTextColor"
+            android:textStyle="bold" />
 
     </LinearLayout>
+
     <ProgressBar
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/progressBarLogin"
-            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout" android:layout_marginTop="84dp"
-            app:layout_constraintHorizontal_bias="0.498"/>
+        android:id="@+id/progressBarLogin"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="84dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
