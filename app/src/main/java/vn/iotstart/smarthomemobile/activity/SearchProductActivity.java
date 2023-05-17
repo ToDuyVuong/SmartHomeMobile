@@ -4,11 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.*;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -63,18 +59,23 @@ public class SearchProductActivity extends AppCompatActivity {
         ApiService.apiService.searchProduct(search).enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                listProduct = response.body();
-                Log.e("TAG", "onResponse: " + listProduct.get(0).getName());
+                try{
+                    listProduct = response.body();
+                    Log.e("TAG", "onResponse: " + listProduct.get(0).getName());
 
-                adapter = new ProductPopularIndexAdapter(listProduct, SearchProductActivity.this);
-                recyclerView.setAdapter(adapter);
-
-
+                    adapter = new ProductPopularIndexAdapter(listProduct, SearchProductActivity.this);
+                    recyclerView.setAdapter(adapter);
+                }
+                catch (Exception e){
+                    Toast.makeText(SearchProductActivity.this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
-
+                Toast.makeText(SearchProductActivity.this, "Không tìm thấy sản phẩm", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

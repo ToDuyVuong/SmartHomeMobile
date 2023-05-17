@@ -3,6 +3,7 @@ package vn.iotstart.smarthomemobile.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -87,6 +88,9 @@ public class IndexActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String search = editTextSearch.getText().toString();
+                if (TextUtils.isEmpty(search)){
+                    return;
+                }
                 Intent intent = new Intent(IndexActivity.this, SearchProductActivity.class);
                 intent.putExtra("search", search);
                 startActivity(intent);
