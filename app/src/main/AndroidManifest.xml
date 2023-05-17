@@ -45,8 +45,8 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
-            android:name=".activity.IndexActivity"
-            android:exported="true">
+                android:name=".activity.IndexActivity"
+                android:exported="true">
 
         </activity>
         <activity android:name=".activity.changePassword.ChangePasswordActivity"></activity>
