@@ -211,6 +211,9 @@
                     android:gravity="center" android:drawableLeft="@android:drawable/ic_menu_set_as"
                     android:layout_margin="2dp"/>
         </LinearLayout>
+        <View style="@style/proifleDetailsView" android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:id="@+id/view2" android:layout_weight="1"/>
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
@@ -226,7 +229,7 @@
         </LinearLayout>
         <View style="@style/proifleDetailsView" android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:id="@+id/view2" android:layout_weight="1"/>
+              android:id="@+id/view3" android:layout_weight="1"/>
 
     </LinearLayout>
 
