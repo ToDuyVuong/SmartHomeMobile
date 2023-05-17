@@ -26,9 +26,9 @@ public class NewPassword extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgotpassword);
 
-        editTextNewPassword = findViewById(R.id.editTextNewForgotPassword);
-        editTextConfirmPassword = findViewById(R.id.editTextConfirmNewForgotPassword);
-        buttonNewPassword = findViewById(R.id.buttonNewForgotPassword);
+        editTextNewPassword = findViewById(R.id.editTextFGNewPassword);
+        editTextConfirmPassword = findViewById(R.id.editTextFGConfirmPassword);
+        buttonNewPassword = findViewById(R.id.buttonFGChangePassword);
 
         buttonNewPassword.setOnClickListener(new View.OnClickListener() {
             @Override

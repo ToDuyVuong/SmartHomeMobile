@@ -211,6 +211,19 @@
                     android:gravity="center" android:drawableLeft="@android:drawable/ic_menu_set_as"
                     android:layout_margin="2dp"/>
         </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <TextView
+                    android:text="Change Password"
+                    style="@style/profileStyledBackButton"
+                    android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1"
+                    android:gravity="center|center_horizontal"
+                    android:drawableLeft="@android:drawable/ic_menu_rotate"
+                    android:layout_margin="2dp" android:id="@+id/btnChangePassword"/>
+
+        </LinearLayout>
         <View style="@style/proifleDetailsView" android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:id="@+id/view2" android:layout_weight="1"/>

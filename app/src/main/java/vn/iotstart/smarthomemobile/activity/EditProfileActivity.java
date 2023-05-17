@@ -27,6 +27,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import vn.iotstart.smarthomemobile.PreManager;
 import vn.iotstart.smarthomemobile.R;
+import vn.iotstart.smarthomemobile.activity.changePassword.ChangePasswordActivity;
 import vn.iotstart.smarthomemobile.api.ApiService;
 import vn.iotstart.smarthomemobile.model.User;
 import androidx.appcompat.widget.Toolbar;
@@ -41,7 +42,7 @@ public class EditProfileActivity extends AppCompatActivity {
     RadioButton radioMale, radioFemale;
     RadioGroup radioGroupGender;
     ImageView avatar;
-    TextView btnSave, btnEdit, btnUpload, btnLogout, btnBack;
+    TextView btnSave, btnEdit, btnUpload, btnLogout, btnBack, btnChangePassword;
     RelativeLayout nameRelative, phoneRelative, emailRelative, addressRelative;
     TextView nameTitle, nameContent, phoneTitle, phoneContent, emailTitle, emailContent, addressTitle, addressContent;
     EditText nameText, phoneText, emailText, addressText;
@@ -131,6 +132,12 @@ public class EditProfileActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), ListOrderActivity.class));
             }
         });
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ChangePasswordActivity.class));
+            }
+        });
     }
 
 
@@ -142,6 +149,7 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSave = findViewById(R.id.btnSave);
         btnUpload = findViewById(R.id.btnUpload);
         btnLogout = findViewById(R.id.btnLoggout);
+        btnChangePassword = findViewById(R.id.btnChangePassword);
         radioMale = findViewById(R.id.radioButtonProfileMale);
         radioFemale = findViewById(R.id.radioButtonProfileFemale);
         radioGroupGender = findViewById(R.id.radioProfileGender);
@@ -264,8 +272,6 @@ public class EditProfileActivity extends AppCompatActivity {
         //Change later
         user.setAvatar(prefUser.getAvatar());
 
-        Log.d("hello", "getUserInfo: " + user.toString());
-
         return user;
     }
 
@@ -308,7 +314,6 @@ public class EditProfileActivity extends AppCompatActivity {
         final String[] uploadedImageUrl = {""};
         if (imageUri != null)
         {
-            Log.d("hello", "updateUserInfo: ");
             saveImageToFirebase(new ImageUploadCallback() {
                 @Override
                 public void onSuccess(String downloadUrl) {
@@ -326,11 +331,16 @@ public class EditProfileActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Exception e) {
+                    if (progressDialog.isShowing())
+                        progressDialog.dismiss();
                     // Handle the upload failure
                     Log.d("saveImage", "onFailure: " + e.getMessage());
                     saveUser(user);
                 }
             });
+        }
+        else{
+            saveUser(user);
         }
 
 
