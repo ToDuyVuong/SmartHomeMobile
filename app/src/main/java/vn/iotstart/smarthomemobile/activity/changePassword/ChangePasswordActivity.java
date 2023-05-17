@@ -1,6 +1,7 @@
 package vn.iotstart.smarthomemobile.activity.changePassword;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,17 +41,17 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 String newPassword = textNewPass.getText().toString();
                 String confirmPassword = textConfirmPass.getText().toString();
 
-                if (password != user.getPassword()){
+                if (!TextUtils.equals(password , user.getPassword())){
                     textPass.setError("Mật khẩu không đúng");
                     textPass.requestFocus();
                     return;
                 }
-                if (newPassword != confirmPassword){
+                if (!TextUtils.equals(newPassword, confirmPassword)){
                     textNewPass.setError("Mật khẩu mới không khớp");
                     textNewPass.requestFocus();
                     return;
                 }
-                if (newPassword == ""){
+                if (TextUtils.isEmpty(newPassword)){
                     textNewPass.setError("Mật khẩu mới không hợp lệ");
                     textNewPass.requestFocus();
                     return;
@@ -60,6 +61,8 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
                         Toast.makeText(ChangePasswordActivity.this, "Đổi mật khẩu thành công", Toast.LENGTH_SHORT).show();
+                        user.setPassword(newPassword);
+                        preManager.saveUserDetail(user);
                         finish();
                     }
 
