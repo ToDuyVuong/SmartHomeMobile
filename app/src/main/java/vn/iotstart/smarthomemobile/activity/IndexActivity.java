@@ -217,7 +217,7 @@ public class IndexActivity extends AppCompatActivity {
                         pupulateData(productList);
                         intiAdapter();
                         initScrollListener();
-                        Log.e("ffff", productList.get(0).toString());
+                        Log.e("ffffff", productList.get(0).toString());
 
                     }
                 } catch (Exception e) {
@@ -252,11 +252,15 @@ public class IndexActivity extends AppCompatActivity {
         recyclerViewProductPopularIndexList = findViewById(R.id.recyclerView2);
         recyclerViewProductPopularIndexList.setLayoutManager(linearLayoutManager);
 
+        Log.e("ffffa", "recyclerViewProductPopularIndex");
         ApiService.apiService.getLatestProduct().enqueue(new Callback<List<Product>>() {
+
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
+                Log.e("ffffa", "recyclerViewProductPopularIndex22222");
                 if (response.isSuccessful()) {
                     productList = response.body();
+                    Log.e("fffflast", productList.get(0).toString());
                     adapterProductPopularIndex = new ProductPopularIndexAdapter(productList, IndexActivity.this);
                     recyclerViewProductPopularIndexList.setAdapter(adapterProductPopularIndex);
 

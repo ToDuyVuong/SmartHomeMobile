@@ -18,7 +18,7 @@ public class IntroActivity extends AppCompatActivity {
             int n = 0;
             try {
                 do {
-                    if (n >= 2000) {
+                    if (n >= 3000) {
                         IntroActivity.this.finish();
                         Intent intent = new Intent(IntroActivity.this.getApplicationContext(), (Class) LoginActivity.class);
                         IntroActivity.this.startActivity(intent);
