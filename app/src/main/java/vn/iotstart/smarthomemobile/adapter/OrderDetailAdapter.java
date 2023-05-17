@@ -70,8 +70,8 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
 
         public void bind(OrderItem orderItem) {
             textViewProductName.setText(orderItem.getProduct().getName());
-            textViewQuantity.setText(String.valueOf(orderItem.getQuantity()));
-            textViewPrice.setText(String.valueOf(orderItem.getPrice()));
+            textViewQuantity.setText("Số lượng: "+String.valueOf(orderItem.getQuantity()));
+            textViewPrice.setText("Giá: "+String.valueOf(orderItem.getPrice()));
             Glide.with(context)
                     .load(orderItem.getProduct().getImages().get(0).getImage())
                     .into(imageViewProduct);

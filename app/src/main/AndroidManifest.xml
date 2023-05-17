@@ -29,22 +29,36 @@
         <activity android:name=".activity.ProfileActivity" />
         <activity android:name=".activity.SearchProductActivity" />
 
+<!--        <activity-->
+<!--            android:name=".activity.LoginActivity"-->
+<!--            android:exported="true"-->
+<!--            android:label="@string/title_activity_profile">-->
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--            </intent-filter>-->
+<!--        </activity>-->
+        <activity android:name=".activity.LoginActivity"
+            android:label="@string/title_activity_profile"
+            android:exported="true" />
+        <activity
+            android:name=".activity.EditProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:name=".activity.LoginActivity"
-            android:exported="true"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.ProfileTheme">
+            android:name=".activity.IndexActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.IntroActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.EditProfileActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         
+        <activity android:name=".activity.changePassword.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>
